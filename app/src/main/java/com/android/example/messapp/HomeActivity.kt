@@ -13,6 +13,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val tabLayout = binding.tabLayout
         val viewPager = binding.daysViewPager
         val list = resources.getStringArray(R.array.days)
