@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.example.messapp.databinding.FragmentHomeBinding
 import com.android.example.messapp.databinding.FragmentLoginBinding
+import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class HomeFragment : Fragment() {
@@ -21,7 +24,24 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val db = Firebase.firestore
+        val fetch = FirestoreDataFetch(db)
+        fetch.getBreakfast()
+        val tabLayout = binding.tabLayout
+        val viewPager = binding.daysViewPager
+        val list = resources.getStringArray(R.array.days)
+        val adapter = DaysViewPagerAdapter(
+            requireActivity().supportFragmentManager,
+            lifecycle
+        )
+        viewPager.adapter = adapter
 
+        val tabLayoutMediator = TabLayoutMediator(
+            tabLayout, viewPager, true, true
+        ) { tab, position ->
+            tab.text = list[position]
+        }
+        tabLayoutMediator.attach()
     }
 
 
