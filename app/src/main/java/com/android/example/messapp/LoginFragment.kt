@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.android.example.messapp.databinding.FragmentLoginBinding
@@ -52,6 +53,8 @@ class LoginFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
         auth = Firebase.auth
         binding.googleSignIn.setOnClickListener { signIn() }
         createRequest()
@@ -94,4 +97,5 @@ class LoginFragment : Fragment() {
                 }
         }
     }
+
 }
