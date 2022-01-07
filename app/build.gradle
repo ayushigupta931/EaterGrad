@@ -54,6 +54,11 @@ dependencies {
     implementation("androidx.room:room-runtime:$rootProject.roomVersion")
     annotationProcessor("androidx.room:room-compiler:$rootProject.roomVersion")
 
+    //navigation component
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:$rootProject.roomVersion")
 
