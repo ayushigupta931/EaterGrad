@@ -1,14 +1,16 @@
 package com.android.example.messapp
 
 import android.app.Activity
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
-import com.android.example.messapp.databinding.ActivityLoginBinding
+import androidx.navigation.fragment.findNavController
+import com.android.example.messapp.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -19,9 +21,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
-class LoginActivity : AppCompatActivity() {
+class LoginFragment : Fragment() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -35,16 +37,21 @@ class LoginActivity : AppCompatActivity() {
                     firebaseAuthWithGoogle(account?.idToken!!)
                 } catch (e: ApiException) {
                     binding.progressBar1.visibility = View.GONE
-                    Toast.makeText(this@LoginActivity, "Sign In failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), "Sign In failed", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
+        binding = FragmentLoginBinding.inflate(inflater,container,false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         auth = Firebase.auth
         binding.googleSignIn.setOnClickListener { signIn() }
         createRequest()
@@ -57,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                 .requestEmail()
                 .build()
 
-            googleSignInClient = GoogleSignIn.getClient(this@LoginActivity, gso)
+            googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
         }
     }
 
@@ -72,19 +79,17 @@ class LoginActivity : AppCompatActivity() {
         lifecycleScope.launch{
             val credential = GoogleAuthProvider.getCredential(idToken, null)
             auth.signInWithCredential(credential)
-                .addOnCompleteListener(this@LoginActivity) { task ->
+                .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
                         binding.progressBar1.visibility = View.GONE
-                        Toast.makeText(this@LoginActivity, "Signed in successfully!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), "Signed in successfully!", Toast.LENGTH_SHORT).show()
 
                         // start home activity
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
+                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment2)
 
                     } else {
                         binding.progressBar1.visibility = View.GONE
-                        Toast.makeText(this@LoginActivity, "Sign In failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), "Sign In failed", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
