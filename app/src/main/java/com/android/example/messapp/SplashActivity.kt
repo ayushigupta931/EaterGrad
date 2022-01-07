@@ -23,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
         if (currentUser == null)
             intent = Intent(this@SplashActivity, LoginActivity::class.java)    // start login activity
         else
-            intent = Intent(this@SplashActivity, MainActivity::class.java)    // start home activity
+            intent = Intent(this@SplashActivity, HomeActivity::class.java)    // start home activity
 
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         Handler(Looper.getMainLooper()).postDelayed({ startActivity(intent) }, 2000)
