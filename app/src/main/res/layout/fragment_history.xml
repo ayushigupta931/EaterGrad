@@ -5,10 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".HistoryFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hii" />
+        tools:itemCount="5"
+        tools:listitem="@layout/history_cardview" />
 
 </FrameLayout>
 
