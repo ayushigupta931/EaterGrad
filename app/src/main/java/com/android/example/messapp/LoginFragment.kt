@@ -90,17 +90,19 @@ class LoginFragment : Fragment() {
                         binding.progressBar1.visibility = View.GONE
                         Toast.makeText(requireActivity(), "Signed in successfully!", Toast.LENGTH_SHORT).show()
 
-                        val role = auth.currentUser?.email?.let { userViewmodel.checkRole(it) }
-                        if(role == 1)
-                            findNavController().navigate(R.id.action_loginFragment_to_adminFragment)
-                        else
-                        {
-                            if(userViewmodel.isNewUser(auth.uid)){
-                                userViewmodel.createNewUser(auth.uid, auth.currentUser?.displayName,
-                                    auth.currentUser?.email
-                                )
+                        lifecycleScope.launchWhenCreated {
+                            val role = auth.currentUser?.email?.let { userViewmodel.checkRole(it) }
+                            if(role == 1)
+                                findNavController().navigate(R.id.action_loginFragment_to_adminFragment)
+                            else
+                            {
+                                if(userViewmodel.isNewUser(auth.uid)){
+                                    userViewmodel.createNewUser(auth.uid, auth.currentUser?.displayName,
+                                        auth.currentUser?.email
+                                    )
+                                }
+                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment2)
                             }
-                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment2)
                         }
 
 
