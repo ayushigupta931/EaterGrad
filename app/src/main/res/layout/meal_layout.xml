@@ -27,17 +27,17 @@
                 android:id="@+id/meals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Breakfast"
                 android:textColor="@color/black"
-                android:textSize="45sp"
-                android:text="Breakfast" />
+                android:textSize="45sp" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Tea + Apple + Juice + ... "
                 android:textColor="@color/black"
-                android:textSize="25sp"
-                android:text="Tea + Apple + Juice + ... " />
+                android:textSize="25sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

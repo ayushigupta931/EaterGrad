@@ -6,18 +6,18 @@ import androidx.lifecycle.LiveData
 class DateRepository(private val dateDAO: DateDAO) {
 
 
-    suspend fun insert(date : Date){
-        dateDAO.insert(date)
+    suspend fun insert(mDate : mDate){
+        dateDAO.insert(mDate)
     }
 
 
-    suspend fun update(date : Date){
-        dateDAO.update(date)
+    suspend fun update(mDate : mDate){
+        dateDAO.update(mDate)
     }
 
 
-    suspend fun delete(date : Date){
-        dateDAO.delete(date)
+    suspend fun delete(mDate : mDate){
+        dateDAO.delete(mDate)
     }
 
 
@@ -26,7 +26,7 @@ class DateRepository(private val dateDAO: DateDAO) {
     }
 
 
-    fun getAllDates(): LiveData<List<Date>>{
+    fun getAllDates(): LiveData<List<mDate>>{
         return dateDAO.getAllDates()
     }
 }

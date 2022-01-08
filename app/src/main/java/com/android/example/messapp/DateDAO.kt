@@ -2,21 +2,25 @@ package com.android.example.messapp
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DateDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(date: Date)
+    suspend fun insert(mDate: mDate)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(date: Date)
+    suspend fun update(mDate: mDate)
 
     @Delete
-    suspend fun delete(date: Date)
+    suspend fun delete(mDate: mDate)
 
     @Query("DELETE FROM date")
     suspend fun deleteAll()
 
     @Query("SELECT * FROM date")
-    fun getAllDates(): LiveData<List<Date>>
+    fun getAllDates(): LiveData<List<mDate>>
+
+    @Query("SELECT * FROM date WHERE date = :date")
+    fun getDate(date:String):Flow<mDate?>
 }

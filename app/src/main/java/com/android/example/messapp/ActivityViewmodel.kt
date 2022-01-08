@@ -28,14 +28,12 @@ class ActivityViewmodel:ViewModel() {
 //                val date= Date("08-01-2022",true,false,true)
 //                dateViewModel.insert(date)
 
-                print("hiii")
-                dateRef.get().addOnSuccessListener { documents ->
-                    for (document in documents) {
-                        dateViewModel.insert(document.toObject())
+                dateRef.addSnapshotListener { value, error ->
+                    value?:return@addSnapshotListener
+                    for (document in value.documents) {
+                        dateViewModel.insert(document.toObject()!!)
                         Log.d(TAG, "${document.id} => ${document.data}")
                     }
-                }.addOnFailureListener { exception ->
-                    Log.w(TAG, "Error getting documents: ", exception)
                 }
             }
         }
