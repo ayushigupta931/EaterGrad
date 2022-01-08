@@ -6,14 +6,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class DateViewModel(application: Application): AndroidViewModel(application) {
-    val alldate: LiveData<List<Date>>
-    private val repository: DateRepository
-    init {
-        val userDao = DateDatabase.getDatabase(application).dateDao()
-        repository = DateRepository(userDao)
+class DateViewModel(): ViewModel() {
+    lateinit var alldate: LiveData<List<Date>>
+    lateinit var dateDao: DateDAO
+
+
+    lateinit var repository: DateRepository
+
+    fun init(app: Application) {
+        if (::alldate.isInitialized) return
+        dateDao = DateDatabase.getDatabase(app).dateDao()
+        repository = DateRepository(dateDao)
         alldate = repository.getAllDates()
     }
+
 
     fun insert(date: Date) = viewModelScope.launch(Dispatchers.IO){
         repository.insert(date)

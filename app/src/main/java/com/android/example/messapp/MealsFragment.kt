@@ -22,9 +22,11 @@ class MealsFragment(private val position:Int) : Fragment() {
         val sharedPref = requireActivity().getSharedPreferences(
             getString(R.string.app_name), Context.MODE_PRIVATE)
         var data: MenuModel?
+        val meals : MutableList<List<String>> = arrayListOf()
         val view = inflater.inflate(R.layout.fragment_meals, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.mealsRecyclerView)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+        lateinit var recyclerAdapter:MealsListAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         if(position in 0..6){
@@ -40,19 +42,19 @@ class MealsFragment(private val position:Int) : Fragment() {
 
             if (data != null) {
                 progressBar.visibility = View.GONE
-//                val editor = sharedPref.edit()
-//                editor.putString("breakfast", data!!.breakfast.toString())
-//                editor.apply()
+                meals.add(data!!.breakfast)
+                meals.add(data!!.lunch)
+                meals.add(data!!.dinner)
+                recyclerAdapter.notifyDataSetChanged()
             } else
                 progressBar.visibility = View.VISIBLE
         }
-        val recyclerAdapter = MealsListAdapter(activity)
+        recyclerAdapter = MealsListAdapter(activity,meals)
         recyclerView.adapter = recyclerAdapter
         val itemTouchHelper = ItemTouchHelper(MealsItemTouchHelper(recyclerAdapter))
         itemTouchHelper.attachToRecyclerView(recyclerView)
         return view
     }
-
 
     companion object {
         @JvmStatic

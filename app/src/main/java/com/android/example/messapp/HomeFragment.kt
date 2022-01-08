@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.android.example.messapp.databinding.FragmentHomeBinding
 import com.android.example.messapp.databinding.FragmentLoginBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -32,6 +33,11 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeFragment_to_historyFragment)
                 true
             }
+            R.id.action_sign_out-> {
+                Firebase.auth.signOut()
+                findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -46,7 +52,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        
+        (activity as AppCompatActivity).supportActionBar?.title = "Mess App"
         val tabLayout = binding.tabLayout
         val viewPager = binding.daysViewPager
         val list = resources.getStringArray(R.array.days)

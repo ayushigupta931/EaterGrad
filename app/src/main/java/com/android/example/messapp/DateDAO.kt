@@ -8,7 +8,7 @@ interface DateDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(date: Date)
 
-    @Update(onConflict = OnConflictStrategy.IGNORE)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(date: Date)
 
     @Delete

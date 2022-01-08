@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.android.example.messapp.databinding.FragmentLoginBinding
@@ -19,6 +20,8 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
@@ -27,7 +30,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-
+    private val userViewmodel by viewModels<UserViewmodel>()
     private val getActivityResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
@@ -87,8 +90,21 @@ class LoginFragment : Fragment() {
                         binding.progressBar1.visibility = View.GONE
                         Toast.makeText(requireActivity(), "Signed in successfully!", Toast.LENGTH_SHORT).show()
 
-                        // start home activity
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment2)
+                        lifecycleScope.launchWhenCreated {
+                            val role = auth.currentUser?.email?.let { userViewmodel.checkRole(it) }
+                            if(role == 1)
+                                findNavController().navigate(R.id.action_loginFragment_to_adminFragment)
+                            else
+                            {
+                                if(userViewmodel.isNewUser(auth.uid)){
+                                    userViewmodel.createNewUser(auth.uid, auth.currentUser?.displayName,
+                                        auth.currentUser?.email
+                                    )
+                                }
+                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment2)
+                            }
+                        }
+
 
                     } else {
                         binding.progressBar1.visibility = View.GONE

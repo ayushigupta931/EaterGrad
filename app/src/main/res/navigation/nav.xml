@@ -39,18 +39,10 @@
         <action
             android:id="@+id/action_homeFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_expensesFragment"
-            app:destination="@id/expensesFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.android.example.messapp.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
-    <fragment
-        android:id="@+id/expensesFragment"
-        android:name="com.android.example.messapp.ExpensesFragment"
-        android:label="fragment_expenses"
-        tools:layout="@layout/fragment_expenses" />
 </navigation>

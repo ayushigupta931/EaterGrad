@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 
 
 class DateRepository(private val dateDAO: DateDAO) {
-    val allDate: LiveData<List<Date>> = dateDAO.getAllDates()
 
 
     suspend fun insert(date : Date){
@@ -28,6 +27,6 @@ class DateRepository(private val dateDAO: DateDAO) {
 
 
     fun getAllDates(): LiveData<List<Date>>{
-        return allDate
+        return dateDAO.getAllDates()
     }
 }
