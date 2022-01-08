@@ -1,10 +1,10 @@
 package com.android.example.messapp
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.android.example.messapp.databinding.FragmentHomeBinding
 import com.android.example.messapp.databinding.FragmentLoginBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -15,6 +15,26 @@ import com.google.firebase.ktx.Firebase
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_expenses -> {
+                // navigate to settings screen
+                true
+            }
+            R.id.action_history -> {
+                findNavController().navigate(R.id.action_homeFragment_to_historyFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,7 +44,9 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        
         val tabLayout = binding.tabLayout
         val viewPager = binding.daysViewPager
         val list = resources.getStringArray(R.array.days)

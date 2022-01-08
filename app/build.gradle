@@ -53,6 +53,7 @@ dependencies {
     // Room
     implementation("androidx.room:room-runtime:$rootProject.roomVersion")
     annotationProcessor("androidx.room:room-compiler:$rootProject.roomVersion")
+    implementation "androidx.room:room-ktx:2.4.0"
 
     //navigation component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
