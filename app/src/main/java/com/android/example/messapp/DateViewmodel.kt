@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 
 
 class DateViewModel(): ViewModel() {
-    lateinit var alldate: LiveData<List<Date>>
+    lateinit var alldate: LiveData<List<mDate>>
     lateinit var dateDao: DateDAO
 
 
@@ -21,14 +21,14 @@ class DateViewModel(): ViewModel() {
     }
 
 
-    fun insert(date: Date) = viewModelScope.launch(Dispatchers.IO){
-        repository.insert(date)
+    fun insert(mDate: mDate) = viewModelScope.launch(Dispatchers.IO){
+        repository.insert(mDate)
     }
-    fun update(date: Date) = viewModelScope.launch(Dispatchers.IO){
-        repository.update(date)
+    fun update(mDate: mDate) = viewModelScope.launch(Dispatchers.IO){
+        repository.update(mDate)
     }
-    fun delete(date: Date) = viewModelScope.launch(Dispatchers.IO){
-        repository.delete(date)
+    fun delete(mDate: mDate) = viewModelScope.launch(Dispatchers.IO){
+        repository.delete(mDate)
     }
     fun deleteAll() = viewModelScope.launch(Dispatchers.IO){
         repository.deleteAll()

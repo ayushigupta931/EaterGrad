@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "date")
-data class Date(
+data class mDate(
     @PrimaryKey val date: String = "",
     val breakfast: Boolean = false,
     val lunch: Boolean = false,

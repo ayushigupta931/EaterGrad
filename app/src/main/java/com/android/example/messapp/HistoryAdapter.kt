@@ -1,14 +1,12 @@
 package com.android.example.messapp
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.messapp.databinding.HistoryCardviewBinding
 
 class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
-    private var dates:List<Date>  = emptyList<Date>()
+    private var mDates:List<mDate>  = emptyList<mDate>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -21,7 +19,7 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
 
     override fun onBindViewHolder(holder: HistoryAdapter.ViewHolder, position: Int) {
         with(holder){
-            with(dates[position]){
+            with(mDates[position]){
                 binding.date.text = this.date
                 if(this.breakfast){
                     binding.breakfast.text="Breakfast: Done"
@@ -46,10 +44,10 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
     }
 
     override fun getItemCount(): Int {
-        return dates.size
+        return mDates.size
     }
-    fun setDates(dates: List<Date>){
-        this.dates = dates
+    fun setDates(mDates: List<mDate>){
+        this.mDates = mDates
         notifyDataSetChanged()
     }
     inner class ViewHolder(val binding: HistoryCardviewBinding): RecyclerView.ViewHolder(binding.root){

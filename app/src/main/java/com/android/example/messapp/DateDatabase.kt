@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Date::class], version = 1, exportSchema = false)
+@Database(entities = [mDate::class], version = 1, exportSchema = false)
 abstract class DateDatabase : RoomDatabase(){
     abstract fun dateDao(): DateDAO
     companion object{
