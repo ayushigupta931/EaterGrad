@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -30,16 +31,24 @@ class SplashFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val auth: FirebaseAuth = Firebase.auth
         val currentUser = auth.currentUser
+        val userViewmodel by viewModels<UserViewmodel>()
 
         if (currentUser == null)
             Handler(Looper.getMainLooper()).postDelayed(
                 { findNavController().navigate(R.id.action_splashFragment_to_loginFragment) },
                 1500) // start login activity
         else
-            Handler(Looper.getMainLooper()).postDelayed(
-                { findNavController().navigate(R.id.action_splashFragment_to_homeFragment2) },
-                1500)  // start home activity
-
+        {
+            val role = auth.currentUser?.email?.let { userViewmodel.checkRole(it) }
+            if(role == 2)
+                Handler(Looper.getMainLooper()).postDelayed(
+                    { findNavController().navigate(R.id.action_splashFragment_to_homeFragment2) },
+                    1500)  // start home activity
+            else
+                Handler(Looper.getMainLooper()).postDelayed(
+                    { findNavController().navigate(R.id.action_splashFragment_to_adminFragment) },
+                    1500)
+        }
     }
 
 }

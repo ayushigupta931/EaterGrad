@@ -1,5 +1,6 @@
 package com.android.example.messapp
 
+import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,8 +12,8 @@ import com.google.firebase.firestore.DocumentSnapshot
 import androidx.annotation.NonNull
 
 import com.google.android.gms.tasks.OnCompleteListener
-
-
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class UserViewmodel : ViewModel() {
@@ -63,4 +64,43 @@ class UserViewmodel : ViewModel() {
 
 
     }
+
+    fun checkRole(currentUserEmail: String) : Int
+    {
+        val db = Firebase.firestore
+        val admins = db.collection("admin")
+        var role = 0
+
+        viewModelScope.launch {
+            admins.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        for (doc in document)
+                        {
+                            val email = doc.getString("email")
+                            if(email== currentUserEmail)
+                            {
+                                role = 1
+                                Log.e("Role after email = ", role.toString())
+                                break
+                            }
+                        }
+                        if(role == 0)
+                            role = 2
+                    } else {
+                        role = 2
+                        Log.d(ContentValues.TAG, "No such document")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "get failed with ", exception)
+                }
+
+            Log.e("Role before check = ", role.toString())
+
+        }
+
+        return role
+    }
+
 }

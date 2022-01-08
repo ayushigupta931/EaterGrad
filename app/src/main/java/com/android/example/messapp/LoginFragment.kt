@@ -89,13 +89,20 @@ class LoginFragment : Fragment() {
                     if (task.isSuccessful) {
                         binding.progressBar1.visibility = View.GONE
                         Toast.makeText(requireActivity(), "Signed in successfully!", Toast.LENGTH_SHORT).show()
-                        if(userViewmodel.isNewUser(auth.uid)){
-                            userViewmodel.createNewUser(auth.uid, auth.currentUser?.displayName,
-                                auth.currentUser?.email
-                            )
+
+                        val role = auth.currentUser?.email?.let { userViewmodel.checkRole(it) }
+                        if(role == 2)
+                        {
+                            if(userViewmodel.isNewUser(auth.uid)){
+                                userViewmodel.createNewUser(auth.uid, auth.currentUser?.displayName,
+                                    auth.currentUser?.email
+                                )
+                            }
+                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment2)
                         }
-                        // start home activity
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment2)
+                        else
+                            findNavController().navigate(R.id.action_loginFragment_to_adminFragment)
+
 
                     } else {
                         binding.progressBar1.visibility = View.GONE
