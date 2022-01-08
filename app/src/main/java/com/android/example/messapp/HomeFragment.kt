@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        
         val tabLayout = binding.tabLayout
         val viewPager = binding.daysViewPager
         val list = resources.getStringArray(R.array.days)

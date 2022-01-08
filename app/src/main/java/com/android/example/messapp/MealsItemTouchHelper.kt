@@ -41,13 +41,13 @@ class MealsItemTouchHelper( adapter: MealsListAdapter) :
         val itemView: View = viewHolder.itemView
         val backgroundCornerOffset = 20
         if (dX > 0) {
-            icon = ContextCompat.getDrawable(mAdapter.getContext1()!!, R.drawable.ic_delete)
-            if(mAdapter.context!=null){
-                background = ColorDrawable(ContextCompat.getColor(mAdapter.getContext1()!!, R.color.holo_red_light))
+            icon = ContextCompat.getDrawable(mAdapter.contextGet()!!, R.drawable.ic_delete)
+            if(mAdapter.activity!=null){
+                background = ColorDrawable(ContextCompat.getColor(mAdapter.contextGet()!!, R.color.holo_red_light))
             }
 
         } else {
-            icon = ContextCompat.getDrawable(mAdapter.getContext1()!!, R.drawable.ic_delete)
+            icon = ContextCompat.getDrawable(mAdapter.contextGet()!!, R.drawable.ic_delete)
             background = ColorDrawable(Color.RED)
         }
         assert(icon != null)

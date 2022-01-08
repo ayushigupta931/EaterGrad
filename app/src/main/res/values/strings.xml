@@ -11,4 +11,9 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </array>
+    <array name="meals">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+    </array>
 </resources>
