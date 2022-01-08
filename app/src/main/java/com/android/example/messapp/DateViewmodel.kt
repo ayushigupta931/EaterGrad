@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class DateViewModel(application: Application): AndroidViewModel(application) {
+class DateViewModel(): ViewModel() {
     lateinit var alldate: LiveData<List<Date>>
     lateinit var dateDao: DateDAO
 
