@@ -14,6 +14,7 @@ import androidx.annotation.NonNull
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 
@@ -66,16 +67,15 @@ class UserViewmodel : ViewModel() {
 
     }
 
-    fun checkRole(currentUserEmail: String) : Int
+    suspend fun checkRole(currentUserEmail: String) : Int
     {
         val db = Firebase.firestore
         val admins = db.collection("admin")
         var role = 0
 
-        viewModelScope.launch {
-            admins.get().addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val document = task.result
+        return suspendCoroutine  {
+            admins.get()
+                .addOnSuccessListener { document ->
                     if (document != null) {
                         for (doc in document)
                         {
@@ -83,7 +83,6 @@ class UserViewmodel : ViewModel() {
                             if(email== currentUserEmail)
                             {
                                 role = 1
-                                Log.e("Role after email = ", role.toString())
                                 break
                             }
                         }
@@ -93,13 +92,14 @@ class UserViewmodel : ViewModel() {
                         role = 2
                         Log.d(ContentValues.TAG, "No such document")
                     }
+                    it.resume(role)
                 }
-                else {
-                    Log.d(TAG, "Failed with: ", task.exception)
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "get failed with ", exception)
                 }
-            }
+            role
         }
-        return role
+
     }
 
 }
