@@ -16,16 +16,13 @@ import com.google.firebase.ktx.Firebase
 
 
 class ExpensesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private lateinit var binding: FragmentExpensesBinding
     private val db = Firebase.firestore
     var brkFastCnt: Int= 30
     var lunchCnt: Int=30
     var dinnerCnt: Int=30
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +70,6 @@ class ExpensesFragment : Fragment() {
         binding.LunchCnt.text = lunchCnt.toString()
         binding.DinnerCnt.text = dinnerCnt.toString()
         return binding.root
-        // Inflate the layout for this fragment
 
     }
 

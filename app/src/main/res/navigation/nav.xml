@@ -14,6 +14,11 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/nav"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_loginFragment_to_adminFragment"
+            app:destination="@id/adminFragment"
+            app:popUpTo="@id/nav"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -30,6 +35,11 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/nav"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_splashFragment_to_adminFragment"
+            app:destination="@id/adminFragment"
+            app:popUpTo="@id/nav"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -39,10 +49,28 @@
         <action
             android:id="@+id/action_homeFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_expensesFragment"
+            app:destination="@id/expensesFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.android.example.messapp.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.android.example.messapp.AdminFragment"
+        android:label="fragment_admin"
+        tools:layout="@layout/fragment_admin" />
+    <fragment
+        android:id="@+id/expensesFragment"
+        android:name="com.android.example.messapp.ExpensesFragment"
+        android:label="fragment_expenses"
+        tools:layout="@layout/fragment_expenses" />
 </navigation>
