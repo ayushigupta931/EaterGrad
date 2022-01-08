@@ -8,15 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class DaysViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun createFragment(position: Int): Fragment {
-        var fragment: Fragment
-        when(position){
-            1 -> {fragment = MealsFragment.newInstance() }
-            else->{
-                return MealsFragment.newInstance()
-            }
-
-        }
-        return fragment
+        return MealsFragment.newInstance(position)
     }
     override fun getItemCount(): Int {
         return 7

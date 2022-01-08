@@ -24,9 +24,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val db = Firebase.firestore
-        val fetch = FirestoreDataFetch(db)
-        fetch.getBreakfast()
+
         val tabLayout = binding.tabLayout
         val viewPager = binding.daysViewPager
         val list = resources.getStringArray(R.array.days)
