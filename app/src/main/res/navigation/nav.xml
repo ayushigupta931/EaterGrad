@@ -39,6 +39,11 @@
         <action
             android:id="@+id/action_homeFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/historyFragment"

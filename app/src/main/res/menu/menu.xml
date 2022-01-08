@@ -12,4 +12,9 @@
         android:icon="@drawable/ic_baseline_history_24"
         android:title="History"
         app:showAsAction="ifRoom|withText"/>
+    <item
+        android:id="@+id/action_sign_out"
+        android:icon="@drawable/ic_baseline_sign_out_24"
+        android:title="Sign Out"
+        app:showAsAction="ifRoom|withText"/>
 </menu>
