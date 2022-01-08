@@ -54,6 +54,9 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/nav"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_expensesFragment"
+            app:destination="@id/expensesFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -65,4 +68,9 @@
         android:name="com.android.example.messapp.AdminFragment"
         android:label="fragment_admin"
         tools:layout="@layout/fragment_admin" />
+    <fragment
+        android:id="@+id/expensesFragment"
+        android:name="com.android.example.messapp.ExpensesFragment"
+        android:label="fragment_expenses"
+        tools:layout="@layout/fragment_expenses" />
 </navigation>
