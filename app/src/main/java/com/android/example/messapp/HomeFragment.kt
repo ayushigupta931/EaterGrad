@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_expenses -> {
-                // navigate to settings screen
+               findNavController().navigate(R.id.action_homeFragment_to_expensesFragment) // navigate to settings screen
                 true
             }
             R.id.action_history -> {

@@ -14,6 +14,46 @@
       },
       "oauth_client": [
         {
+          "client_id": "797607921591-1776uevh0hahnua8sncs10df9aiem8m5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.example.messapp",
+            "certificate_hash": "e4279bbb801135c85dbf6c718217b2714ae5ea4f"
+          }
+        },
+        {
+          "client_id": "797607921591-i0ugk6o2jsss6vla5ve9phhqr3h9e5p9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.example.messapp",
+            "certificate_hash": "73e3c39a0ce76913f6918018354ef7fa4b8c8749"
+          }
+        },
+        {
+          "client_id": "797607921591-lb3f8i12kro8e8u22j356rugtihonf7v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.example.messapp",
+            "certificate_hash": "6170311e269839e223fb000359a2249044ab9410"
+          }
+        },
+        {
+          "client_id": "797607921591-p5kego6l47c19tejgasldp4sil6h1hf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.example.messapp",
+            "certificate_hash": "d70c5c52f1ff19507aef6b977f44ac54e997f907"
+          }
+        },
+        {
+          "client_id": "797607921591-tib8kibnu0hf9q4ir1cgg0u5clopbuug.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.example.messapp",
+            "certificate_hash": "0b45f1ab4d50f6ac645d0d1746b2973b6f53c352"
+          }
+        },
+        {
           "client_id": "797607921591-vqrh4atbh97lmbsalgajk8lubudvl5lh.apps.googleusercontent.com",
           "client_type": 3
         }
