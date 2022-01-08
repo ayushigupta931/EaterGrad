@@ -91,7 +91,9 @@ class LoginFragment : Fragment() {
                         Toast.makeText(requireActivity(), "Signed in successfully!", Toast.LENGTH_SHORT).show()
 
                         val role = auth.currentUser?.email?.let { userViewmodel.checkRole(it) }
-                        if(role == 2)
+                        if(role == 1)
+                            findNavController().navigate(R.id.action_loginFragment_to_adminFragment)
+                        else
                         {
                             if(userViewmodel.isNewUser(auth.uid)){
                                 userViewmodel.createNewUser(auth.uid, auth.currentUser?.displayName,
@@ -100,8 +102,6 @@ class LoginFragment : Fragment() {
                             }
                             findNavController().navigate(R.id.action_loginFragment_to_homeFragment2)
                         }
-                        else
-                            findNavController().navigate(R.id.action_loginFragment_to_adminFragment)
 
 
                     } else {

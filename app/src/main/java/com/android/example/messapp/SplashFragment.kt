@@ -40,13 +40,13 @@ class SplashFragment : Fragment() {
         else
         {
             val role = auth.currentUser?.email?.let { userViewmodel.checkRole(it) }
-            if(role == 2)
-                Handler(Looper.getMainLooper()).postDelayed(
-                    { findNavController().navigate(R.id.action_splashFragment_to_homeFragment2) },
-                    1500)  // start home activity
-            else
+            if(role == 1)
                 Handler(Looper.getMainLooper()).postDelayed(
                     { findNavController().navigate(R.id.action_splashFragment_to_adminFragment) },
+                    1500)
+            else
+                Handler(Looper.getMainLooper()).postDelayed(
+                    { findNavController().navigate(R.id.action_splashFragment_to_homeFragment2) },
                     1500)
         }
     }
