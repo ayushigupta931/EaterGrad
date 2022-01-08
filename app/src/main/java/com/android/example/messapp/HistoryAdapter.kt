@@ -48,8 +48,8 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
     override fun getItemCount(): Int {
         return dates.size
     }
-    fun setBirthdays(birthdays: List<Date>){
-        this.dates = birthdays
+    fun setDates(dates: List<Date>){
+        this.dates = dates
         notifyDataSetChanged()
     }
     inner class ViewHolder(val binding: HistoryCardviewBinding): RecyclerView.ViewHolder(binding.root){
