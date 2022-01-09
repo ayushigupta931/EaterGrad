@@ -53,25 +53,27 @@ class MealsFragment(private val position: Int) : Fragment() {
 
         }
         val itemTouchHelper = ItemTouchHelper(MealsItemTouchHelper(recyclerAdapter) { pos, dir ->
-            Toast.makeText(requireContext(), "Position $pos", Toast.LENGTH_SHORT).show()
             when(dir){
-
                 ItemTouchHelper.RIGHT -> {
-                    val builder = AlertDialog.Builder(recyclerAdapter.context)
-                    builder.setTitle("Delete")
-                    builder.setMessage("Are you sure you want to delete?")
-                    builder.setPositiveButton("Confirm") { _, _ ->
-                        viewModel.updateUserPref(pos,false)
-                    }
-                    builder.setNegativeButton("Cancel") { dialog, _ ->
-                        dialog?.dismiss()
+                    if(viewModel.menuUiModelLiveData.value!![pos].coming){
+                        val builder = AlertDialog.Builder(recyclerAdapter.context)
+                        builder.setTitle("Delete")
+                        builder.setMessage("Are you sure you want to delete?")
+                        builder.setPositiveButton("Confirm") { _, _ ->
+                            viewModel.updateUserPref(pos,false)
+                        }
+                        builder.setNegativeButton("Cancel") { dialog, _ ->
+                            dialog?.dismiss()
 
+                        }
+                        val dialog = builder.create()
+                        dialog.show()
                     }
-                    val dialog = builder.create()
-                    dialog.show()
+
                 }
 
                 ItemTouchHelper.LEFT->{
+                    if(!viewModel.menuUiModelLiveData.value!![pos].coming)
                     viewModel.updateUserPref(pos,true)
                 }
 
