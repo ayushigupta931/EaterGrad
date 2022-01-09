@@ -32,7 +32,6 @@ class SplashFragment : Fragment() {
         val auth: FirebaseAuth = Firebase.auth
         val currentUser = auth.currentUser
         val userViewmodel by viewModels<UserViewmodel>()
-
         if (currentUser == null)
             Handler(Looper.getMainLooper()).postDelayed(
                 { findNavController().navigate(R.id.action_splashFragment_to_loginFragment) },

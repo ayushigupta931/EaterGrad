@@ -5,6 +5,7 @@ import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 
 import com.google.firebase.firestore.ktx.firestore
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.text.DateFormat
+import java.text.FieldPosition
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -76,29 +78,20 @@ class FirestoreDataFetch (application: Application): ViewModel() {
         dayFlow.value =day.lowercase()
 
     }
-//    fun setChoice(choiceBf : Boolean,){
-//        //ToDo Get choice from user and date from system and change only
-//        val choice = hashMapOf(
-//            "breakfast" to false,
-//            "lunch" to true,
-//            "dinner" to false,
-//            "date" to "08-01-2022"
-//        )
-//        viewModelScope.launch {
-//            firebaseUserFlow().collect { user->
-//                user?:return@collect
-//                val db = FirebaseFirestore.getInstance()
-//                val TAG="MessApp"
-//                val docRef= user.uid.let {
-//                    db.collection("users")
-//                        .document(it).collection("date")
-//                        .document("09-01-2022")
-//                }
-//                docRef.set(choice).addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!")}
-//                    .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
-//            }
-//        }
-//    }
+
+    fun updateUserPref(position: Int, choice: Boolean){
+        val currentMenu = menuUiModelLiveData.value!!
+        Log.i("Details123","$position $date $choice")
+
+        val breakfast = if(position==0) choice else currentMenu[0].coming
+        val lunch = if(position==1) choice else currentMenu[1].coming
+        val dinner = if(position==2) choice else currentMenu[2].coming
+        val newMenu = mDate(date!!,breakfast, lunch, dinner)
+        viewModelScope.launch {
+            db.collection("users").document(Firebase.auth.currentUser!!.uid)
+                .collection("date").document(date!!).set(newMenu).await()
+        }
+    }
 
 }
 class FirebaseDataFetchViewModelFactory(private val application: Application): ViewModelProvider.Factory{

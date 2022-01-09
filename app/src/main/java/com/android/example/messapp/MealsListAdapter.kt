@@ -23,7 +23,6 @@ class MealsListAdapter(val context: Context?) :
 
     private var list:List<MenuUiModel> = emptyList()
     private lateinit var recyclerView : RecyclerView
-    lateinit var listener: setChoice
 
     fun submitList(menuList:List<MenuUiModel>, recyclerView: RecyclerView){
         list = menuList
@@ -43,7 +42,7 @@ class MealsListAdapter(val context: Context?) :
             descriptionMeal = view.findViewById(R.id.description)
             upArrow = view.findViewById(R.id.upArrow)
 
-            descriptionMeal.setOnClickListener {
+            cardView.setOnClickListener {
                 if(cardView.layoutParams.height != ViewGroup.LayoutParams.WRAP_CONTENT){
                     TransitionManager.beginDelayedTransition(cardView as ViewGroup, AutoTransition())
                     cardView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -76,37 +75,10 @@ class MealsListAdapter(val context: Context?) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.mealsTxt.text = list[position].title
         holder.descriptionMeal.text = list[position].menu.joinToString(" + ")
-//        holder.cardView.visibility=(
-//            if(list[position].coming)
-//                Visible.
-//            else
-//                Color.RED
-//        )
         holder.cardView.isVisible = list[position].coming
-//        Calendar.getInstance().time
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
-
-    interface setChoice {
-        fun setChoiceFun(position: Int, choice: Boolean)
-    }
-
-    fun implementInterface(listener: setChoice){
-        this.listener = listener
-    }
-
-    fun getTitle(position: Int): String {
-        return list[position].title
-    }
-
-
-
-
-//    fun contextGet(): Context? {
-//        return activity
-//    }
-
 }

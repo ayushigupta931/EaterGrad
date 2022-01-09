@@ -1,7 +1,9 @@
 package com.android.example.messapp
 
+import android.app.AlertDialog
 import android.app.Application
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.map
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,18 +27,11 @@ class MealsFragment(private val position: Int) : Fragment() {
             requireActivity().application
         )
     }
-    private val userViewModel by viewModels<UserViewmodel>()
     private val dateViewModel by viewModels<DateViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val sharedPref = requireActivity().getSharedPreferences(
-            getString(R.string.app_name), Context.MODE_PRIVATE
-        )
-        var data: MenuModel?
-        val meals: MutableList<List<String>> = arrayListOf()
         val view = inflater.inflate(R.layout.fragment_meals, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.mealsRecyclerView)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
@@ -44,7 +40,6 @@ class MealsFragment(private val position: Int) : Fragment() {
 
         if (position in 0..6) {
             viewModel.getMenu(resources.getStringArray(R.array.days)[position])
-//            viewModel.setChoice()
         } else {
             viewModel.getMenu(resources.getStringArray(R.array.days)[0])
         }
@@ -52,22 +47,36 @@ class MealsFragment(private val position: Int) : Fragment() {
         val recyclerAdapter: MealsListAdapter = MealsListAdapter(context)
         recyclerView.adapter = recyclerAdapter
 
-        recyclerAdapter.implementInterface(object : MealsListAdapter.setChoice {
-            override fun setChoiceFun(position: Int, choice: Boolean) {
-                lifecycleScope.launch {
-                    userViewModel.setChoice(choice, recyclerAdapter.getTitle(position),dateViewModel.getMyDate(viewModel.date!!), viewModel.date!!)
-                }
-            }
-
-        })
-
         viewModel.menuUiModelLiveData.observe(viewLifecycleOwner) {
             recyclerAdapter.submitList(it, recyclerView)
             progressBar.visibility = View.GONE
 
         }
         val itemTouchHelper = ItemTouchHelper(MealsItemTouchHelper(recyclerAdapter) { pos, dir ->
-            Toast.makeText(requireContext(), dir.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Position $pos", Toast.LENGTH_SHORT).show()
+            when(dir){
+
+                ItemTouchHelper.RIGHT -> {
+                    val builder = AlertDialog.Builder(recyclerAdapter.context)
+                    builder.setTitle("Delete")
+                    builder.setMessage("Are you sure you want to delete?")
+                    builder.setPositiveButton("Confirm") { _, _ ->
+                        viewModel.updateUserPref(pos,false)
+                    }
+                    builder.setNegativeButton("Cancel") { dialog, _ ->
+                        dialog?.dismiss()
+
+                    }
+                    val dialog = builder.create()
+                    dialog.show()
+                }
+
+                ItemTouchHelper.LEFT->{
+                    viewModel.updateUserPref(pos,true)
+                }
+
+            }
+
         })
         itemTouchHelper.attachToRecyclerView(recyclerView)
         viewModel.position = pos
