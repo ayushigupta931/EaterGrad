@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -75,7 +76,11 @@ class MealsListAdapter(val context: Context?) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.mealsTxt.text = list[position].title
         holder.descriptionMeal.text = list[position].menu.joinToString(" + ")
-        holder.cardView.isVisible = list[position].coming
+        if(list[position].coming){
+           holder.cardView.background.setTint(Color.GREEN)
+        }else{
+            holder.cardView.background.setTint(Color.RED)
+        }
     }
 
     override fun getItemCount(): Int {
