@@ -10,9 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.android.example.messapp.databinding.FragmentAdminBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.resume
@@ -20,6 +24,7 @@ import kotlin.coroutines.suspendCoroutine
 import java.lang.Exception
 
 class AdminFragment : Fragment() {
+    private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentAdminBinding
     val db = FirebaseFirestore.getInstance()
     val TAG = "MessApp"
@@ -35,7 +40,15 @@ class AdminFragment : Fragment() {
         return when (item.itemId) {
             R.id.action_sign_out-> {
                 Firebase.auth.signOut()
-                deleteAppData()
+                lifecycleScope.launch{
+                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.web_client_id))
+                        .requestEmail()
+                        .build()
+
+                    googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+                }
+                googleSignInClient.signOut()
                 findNavController().navigate(R.id.action_adminFragment_to_loginFragment)
                 true
             }
@@ -99,14 +112,5 @@ class AdminFragment : Fragment() {
             count
         }
     }
-    private fun deleteAppData() {
-        try {
-            // clearing app data
-            val packageName = context?.packageName
-            val runtime = Runtime.getRuntime()
-            runtime.exec("pm clear $packageName")
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+
 }
