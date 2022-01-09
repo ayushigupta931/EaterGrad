@@ -1,5 +1,6 @@
 package com.android.example.messapp
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 
@@ -24,10 +25,6 @@ class DateRepository(private val dateDAO: DateDAO) {
 
     suspend fun deleteAll(){
         dateDAO.deleteAll()
-    }
-
-    suspend fun getMyDate(date: String): mDate? {
-        return dateDAO.getMyDate(date)
     }
 
 

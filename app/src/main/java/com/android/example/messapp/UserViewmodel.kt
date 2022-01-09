@@ -3,32 +3,30 @@ package com.android.example.messapp
 import android.app.Application
 import android.content.ContentValues
 import android.util.Log
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import com.google.firebase.firestore.DocumentSnapshot
 
-import androidx.annotation.NonNull
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
-
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.tasks.await
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 
-class UserViewmodel : ViewModel() {
+class UserViewmodel() : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     private val userRef: CollectionReference = db.collection("users")
-    private val absentRef = db.collection("absent")
-    val TAG = "MessApp"
 
+    val TAG = "MessApp"
 
     fun isNewUser(uid: String?): Boolean {
         var bool: Boolean = true
@@ -106,35 +104,4 @@ class UserViewmodel : ViewModel() {
 
     }
 
-    suspend fun setChoice(choice: Boolean, title: String, mDate: mDate?, date: String) {
-        viewModelScope.launch {
-            firebaseUserFlow().collect { user->
-                user?: return@collect
-
-                val brkfast = true
-                val lunch = true
-                val dinner = true
-
-                var dateObj = mDate
-                if(dateObj == null){
-                    dateObj = mDate(date,brkfast,lunch,dinner)
-                }
-
-                when (title.lowercase()) {
-                    "breakfast" -> dateObj.breakfast = choice
-                    "lunch" -> dateObj.lunch= choice
-                    "dinner" -> dateObj.dinner =choice
-                }
-                userRef.document(user.uid).collection("date").document(date).set(dateObj).addOnSuccessListener {
-                    Log.i("Success","Document updated")
-                }.addOnFailureListener{
-                    Log.i("Failure","Update fail")
-                }
-
-                absentRef.document(date)
-
-            }
-        }
-
-    }
 }

@@ -1,6 +1,7 @@
 package com.android.example.messapp
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,13 +33,6 @@ class DateViewModel(): ViewModel() {
     }
     fun deleteAll() = viewModelScope.launch(Dispatchers.IO){
         repository.deleteAll()
-    }
-    fun getMyDate(date: String) : mDate? {
-        var myDate: mDate? = null
-        viewModelScope.launch(Dispatchers.IO){
-            myDate = repository.getMyDate(date)
-        }
-        return myDate
     }
 
 
