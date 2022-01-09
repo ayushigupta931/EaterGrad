@@ -43,7 +43,7 @@ class MealsFragment(private val position:Int) : Fragment() {
         val recyclerAdapter:MealsListAdapter = MealsListAdapter()
         recyclerView.adapter = recyclerAdapter
         viewModel.menuUiModelLiveData.observe(viewLifecycleOwner) {
-            recyclerAdapter.submitList(it)
+            recyclerAdapter.submitList(it, recyclerView)
             progressBar.visibility = View.GONE
             //Menu data coming from backend in the form of 3 lists
 //            data = viewModel.menuLiveData.value

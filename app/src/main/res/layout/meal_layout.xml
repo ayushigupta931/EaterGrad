@@ -36,8 +36,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tea + Apple + Juice + ... "
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/upArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_arrow_drop_up_24"
+                android:visibility="gone"
+                android:layout_gravity="right"
+                />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
