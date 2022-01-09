@@ -13,15 +13,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import java.time.LocalDate
 import java.util.*
 
-class MealsListAdapter :
+class MealsListAdapter(val context: Context?) :
     RecyclerView.Adapter<MealsListAdapter.ViewHolder>() {
 
     private var list:List<MenuUiModel> = emptyList()
     private lateinit var recyclerView : RecyclerView
+    lateinit var listener: setChoice
 
     fun submitList(menuList:List<MenuUiModel>, recyclerView: RecyclerView){
         list = menuList
@@ -81,16 +83,27 @@ class MealsListAdapter :
 //                Color.RED
 //        )
         holder.cardView.isVisible = list[position].coming
-        Calendar.getInstance().time
+//        Calendar.getInstance().time
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
 
-    fun deleteItem(position: Int) {
-
+    interface setChoice {
+        fun setChoiceFun(position: Int, choice: Boolean)
     }
+
+    fun implementInterface(listener: setChoice){
+        this.listener = listener
+    }
+
+    fun getTitle(position: Int): String {
+        return list[position].title
+    }
+
+
+
 
 //    fun contextGet(): Context? {
 //        return activity
