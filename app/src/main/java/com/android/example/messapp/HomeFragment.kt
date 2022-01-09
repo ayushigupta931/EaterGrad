@@ -11,6 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.lang.Exception
 
 
 class HomeFragment : Fragment() {
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
             }
             R.id.action_sign_out-> {
                 Firebase.auth.signOut()
+                deleteAppData()
                 findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
                 true
             }
@@ -69,6 +71,15 @@ class HomeFragment : Fragment() {
         }
         tabLayoutMediator.attach()
     }
-
+    private fun deleteAppData() {
+        try {
+            // clearing app data
+            val packageName = context?.packageName
+            val runtime = Runtime.getRuntime()
+            runtime.exec("pm clear $packageName")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
 }

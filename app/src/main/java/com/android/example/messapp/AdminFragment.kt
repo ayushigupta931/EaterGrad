@@ -1,28 +1,48 @@
 package com.android.example.messapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.android.example.messapp.databinding.FragmentAdminBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
-
+import java.lang.Exception
 
 class AdminFragment : Fragment() {
     private lateinit var binding: FragmentAdminBinding
     val db = FirebaseFirestore.getInstance()
     val TAG = "MessApp"
 
-    //TODO add signout to admin fragment
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.admin_menu, menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_sign_out-> {
+                Firebase.auth.signOut()
+                deleteAppData()
+                findNavController().navigate(R.id.action_adminFragment_to_loginFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,6 +97,16 @@ class AdminFragment : Fragment() {
                 Log.w(TAG, "Error getting documents: ", exception)
             }
             count
+        }
+    }
+    private fun deleteAppData() {
+        try {
+            // clearing app data
+            val packageName = context?.packageName
+            val runtime = Runtime.getRuntime()
+            runtime.exec("pm clear $packageName")
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }
