@@ -23,4 +23,8 @@ interface DateDAO {
 
     @Query("SELECT * FROM date WHERE date = :date")
     fun getDate(date:String):Flow<mDate?>
+
+    @Query("SELECT * FROM date WHERE date = :date")
+    fun getMyDate(date:String):mDate?
+
 }

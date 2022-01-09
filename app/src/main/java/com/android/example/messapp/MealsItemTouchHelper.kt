@@ -1,5 +1,7 @@
 package com.android.example.messapp
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
@@ -19,6 +21,36 @@ class MealsItemTouchHelper(
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position = viewHolder.adapterPosition
 //        mAdapter.deleteItem(position)
+
+        when(direction){
+
+            ItemTouchHelper.RIGHT -> {
+                var builder = AlertDialog.Builder(adapter.context)
+                builder.setTitle("Delete")
+                builder.setMessage("Are you sure you want to delete?")
+                builder.setPositiveButton("Confirm", object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface?, p1: Int) {
+                        adapter.listener.setChoiceFun(position, false)
+                    }
+
+                })
+                builder.setNegativeButton("Cancel", object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface?, p1: Int) {
+                        dialog?.dismiss()
+                    }
+
+                })
+                var dialog = builder.create()
+                dialog.show()
+            }
+
+            ItemTouchHelper.LEFT->{
+                adapter.listener.setChoiceFun (position, true)
+            }
+
+        }
+
+
         adapter.notifyItemChanged(position)
         onSwipeComplete(position,direction)
     }
