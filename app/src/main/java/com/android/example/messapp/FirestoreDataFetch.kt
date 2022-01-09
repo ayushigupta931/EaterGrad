@@ -26,6 +26,7 @@ class FirestoreDataFetch (application: Application): ViewModel() {
     private val db = Firebase.firestore
     private val dateDao = DateDatabase.getDatabase(application).dateDao()
     var position : Int =-1
+    var date : String? = ""
 
     private val dayFlow = MutableStateFlow("")
     private val menuFlow = dayFlow.map {
@@ -34,12 +35,6 @@ class FirestoreDataFetch (application: Application): ViewModel() {
     }
 
     private val dateFlow = dayFlow.flatMapLatest {
-        // TODO Convert day to date
-//        val sdf = SimpleDateFormat("dd-mm-yyyy")
-//        val format = sdf.format(Calendar.getInstance().time)
-
-//        val calendar = Calendar.getInstance()
-//        val day = calendar[Calendar.DAY_OF_WEEK]
 
         val format: DateFormat = SimpleDateFormat("dd-MM-yyyy")
         val calendar = Calendar.getInstance()
@@ -51,8 +46,8 @@ class FirestoreDataFetch (application: Application): ViewModel() {
             days[i] = format.format(calendar.time)
             calendar.add(Calendar.DAY_OF_MONTH, 1)
         }
-        val date = days[position]
-        Toast.makeText(application,days[0],Toast.LENGTH_SHORT).show()
+        date = days[position]
+
         dateDao.getDate(date!!)
     }
 
@@ -81,7 +76,7 @@ class FirestoreDataFetch (application: Application): ViewModel() {
         dayFlow.value =day.lowercase()
 
     }
-//    fun setChoice(){
+//    fun setChoice(choiceBf : Boolean,){
 //        //ToDo Get choice from user and date from system and change only
 //        val choice = hashMapOf(
 //            "breakfast" to false,
@@ -104,10 +99,13 @@ class FirestoreDataFetch (application: Application): ViewModel() {
 //            }
 //        }
 //    }
+
 }
 class FirebaseDataFetchViewModelFactory(private val application: Application): ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return FirestoreDataFetch(application) as T
     }
+
+
 
 }
