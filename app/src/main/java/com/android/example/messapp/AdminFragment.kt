@@ -1,12 +1,14 @@
 package com.android.example.messapp
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.app.AlertDialog
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.android.example.messapp.databinding.FragmentAdminBinding
@@ -21,35 +23,49 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
-import java.lang.Exception
 
 class AdminFragment : Fragment() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentAdminBinding
+    private val dateViewModel by viewModels<DateViewModel>()
     val db = FirebaseFirestore.getInstance()
     val TAG = "MessApp"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        dateViewModel.init((activity as AppCompatActivity).applicationContext as Application)
         setHasOptionsMenu(true)
     }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.admin_menu, menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_sign_out-> {
-                Firebase.auth.signOut()
-                lifecycleScope.launch{
-                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.web_client_id))
-                        .requestEmail()
-                        .build()
+            R.id.action_sign_out -> {
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("Sign Out")
+                builder.setMessage("Are you sure you want to Sign out?")
+                builder.setPositiveButton("Confirm") { _, _ ->
+                    dateViewModel.deleteAll()
+                    Firebase.auth.signOut()
+                    lifecycleScope.launch {
+                        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                            .requestIdToken(getString(R.string.web_client_id))
+                            .requestEmail()
+                            .build()
 
-                    googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+                        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+                    }
+                    googleSignInClient.signOut()
+                    findNavController().navigate(R.id.action_adminFragment_to_loginFragment)
                 }
-                googleSignInClient.signOut()
-                findNavController().navigate(R.id.action_adminFragment_to_loginFragment)
+                builder.setNegativeButton("Cancel") { dialog, _ ->
+                    dialog?.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -68,7 +84,7 @@ class AdminFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        (activity as AppCompatActivity).supportActionBar?.title = "Today's Count"
+        (activity as AppCompatActivity).supportActionBar?.title = "Mess App"
         val sdf = SimpleDateFormat("dd-MM-yyyy")
         val currentDate = sdf.format(Date())
         binding.date.text = currentDate.toString()
