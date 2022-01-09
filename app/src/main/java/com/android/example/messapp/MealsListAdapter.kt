@@ -44,11 +44,10 @@ class MealsListAdapter(val context: Context?) :
             upArrow = view.findViewById(R.id.upArrow)
 
             cardView.setOnClickListener {
-                if(cardView.layoutParams.height != ViewGroup.LayoutParams.WRAP_CONTENT){
+                if(descriptionMeal.maxLines == 1){
                     TransitionManager.beginDelayedTransition(cardView as ViewGroup, AutoTransition())
-                    cardView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
                     descriptionMeal.ellipsize = null
-                    descriptionMeal.maxLines = 1000
+                    descriptionMeal.maxLines = 10000
                     upArrow.visibility = View.VISIBLE
                     TransitionManager.beginDelayedTransition(recyclerView as ViewGroup)
                     notifyDataSetChanged()
@@ -58,7 +57,6 @@ class MealsListAdapter(val context: Context?) :
             upArrow.setOnClickListener{
                 TransitionManager.beginDelayedTransition(cardView as ViewGroup,AutoTransition())
                 upArrow.visibility = View.GONE
-                cardView.layoutParams.height = 200
                 descriptionMeal.ellipsize = TextUtils.TruncateAt.END
                 descriptionMeal.maxLines = 1
                 TransitionManager.beginDelayedTransition(recyclerView as ViewGroup)
