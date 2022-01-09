@@ -10,39 +10,54 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Date"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardBreakfast"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:backgroundTint="@color/purple_500"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/teal_200"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/date">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/meals1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Breakfast"
+                    android:text="Breakfast:"
                     android:textColor="@color/black"
                     android:textSize="45sp" />
 
                 <TextView
-                    android:id="@+id/description1"
+                    android:id="@+id/count_breakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
                     android:layout_marginLeft="20dp"
+                    android:text="5"
                     android:textColor="@color/black"
-                    android:textSize="25sp" />
+                    android:textSize="45sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -50,36 +65,39 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardLunch"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:backgroundTint="@color/purple_500"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/teal_200"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardBreakfast">
+            app:layout_constraintTop_toBottomOf="@+id/cardBreakfast">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/meals2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lunch"
+                    android:text="Lunch:"
                     android:textColor="@color/black"
                     android:textSize="45sp" />
 
                 <TextView
-                    android:id="@+id/description2"
+                    android:id="@+id/count_lunch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7"
                     android:layout_marginLeft="20dp"
+                    android:text="7"
                     android:textColor="@color/black"
-                    android:textSize="25sp" />
+                    android:textSize="45sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -87,36 +105,38 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardDinner"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:backgroundTint="@color/purple_500"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/teal_200"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardLunch">
+            app:layout_constraintTop_toBottomOf="@+id/cardLunch">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/meals3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dinner"
+                    android:text="Dinner:"
                     android:textColor="@color/black"
                     android:textSize="45sp" />
 
                 <TextView
-                    android:id="@+id/description3"
+                    android:id="@+id/count_dinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8"
                     android:layout_marginLeft="20dp"
+                    android:text="8"
                     android:textColor="@color/black"
-                    android:textSize="25sp" />
+                    android:textSize="45sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
