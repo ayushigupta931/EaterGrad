@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.android.example.messapp.databinding.FragmentExpensesBinding
 import com.android.example.messapp.databinding.FragmentHomeBinding
@@ -14,6 +15,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -21,10 +25,8 @@ import kotlin.coroutines.suspendCoroutine
 class ExpensesFragment : Fragment() {
 
     private lateinit var binding: FragmentExpensesBinding
-    private val db = Firebase.firestore
-    private val auth: FirebaseAuth = Firebase.auth
-    private val uid = auth.currentUser.toString()
-    private val docref= db.collection("user"). document(uid). collection ("date")
+    private val sdf = SimpleDateFormat("dd-MM-yyyy")
+    private var currentDate = sdf.format(Date())
     /* Breakfast Expense = 25
        Lunch Expense = 40
        Dinner Expense = 45
@@ -35,48 +37,64 @@ class ExpensesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var brkFastCnt = 30
-        var lunchCnt = 30
-        var dinnerCnt = 30
+        binding = FragmentExpensesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        (activity as AppCompatActivity).supportActionBar?.title = "Monthly Expense"
+
+        currentDate = currentDate.toString()
+
+        val day = currentDate.subSequence(0, 2) as String
+        val days = day.toInt()
+
+        var brkFastCnt = days
+        var lunchCnt = days
+        var dinnerCnt = days
 
         lifecycleScope.launchWhenCreated {
             brkFastCnt -= mealFalse("breakfast")
             lunchCnt -= mealFalse("lunch")
             dinnerCnt -= mealFalse("dinner")
+
+            brkFastCnt *= 25
+            lunchCnt *= 40
+            dinnerCnt *= 45
+            val total = brkFastCnt + lunchCnt + dinnerCnt
+
+            binding.BfastCnt.text = "₹ " + brkFastCnt.toString()
+            binding.LunchCnt.text = "₹ " + lunchCnt.toString()
+            binding.DinnerCnt.text = "₹ " + dinnerCnt.toString()
+            binding.totalExpense.text = "₹ " + total.toString()
         }
 
-        brkFastCnt *= 25
-        lunchCnt *= 40
-        dinnerCnt *= 45
-        val total = brkFastCnt+lunchCnt+dinnerCnt
-
-        binding = FragmentExpensesBinding.inflate(inflater,container,false)
-
-        binding.BfastCnt.text = "₹ " + brkFastCnt.toString()
-        binding.LunchCnt.text = "₹ " + lunchCnt.toString()
-        binding.DinnerCnt.text = "₹ " + dinnerCnt.toString()
-        binding.MthExp.text = "₹ " + total.toString()
-
-        return binding.root
     }
 
-    private suspend fun mealFalse(meal : String):Int {
-        var count=0
+    private suspend fun mealFalse(meal: String): Int {
+        val db = Firebase.firestore
+        val auth: FirebaseAuth = Firebase.auth
+        val uid = auth.currentUser?.uid
+        val docref = uid?.let { db.collection("users").document(it).collection("date") }
+        var count = 0
+        val checkDate = currentDate.subSequence(3, 10) as String
 
         return suspendCoroutine {
-            docref.whereEqualTo(meal, false)
-                .get()
-                .addOnSuccessListener { documents ->
-                    for (document in documents) {
+            docref?.whereEqualTo(meal, false)?.get()?.addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val dateRange = document.getString("date")
+                    val validDate = dateRange?.subSequence(3, 10) as String
+                    if (checkDate == validDate)
                         count++
-                    }
-                    it.resume(count)
                 }
-                .addOnFailureListener { exception ->
-                    Log.w(TAG, "Error getting documents: ", exception)
-                }
+                it.resume(count)
+            }?.addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
             count
         }
     }
 
-  }
+}
