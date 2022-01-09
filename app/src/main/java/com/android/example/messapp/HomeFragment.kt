@@ -4,18 +4,23 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.android.example.messapp.databinding.FragmentHomeBinding
 import com.android.example.messapp.databinding.FragmentLoginBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
 
 class HomeFragment : Fragment() {
-
+    private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +41,15 @@ class HomeFragment : Fragment() {
             }
             R.id.action_sign_out-> {
                 Firebase.auth.signOut()
-                deleteAppData()
+                lifecycleScope.launch{
+                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.web_client_id))
+                        .requestEmail()
+                        .build()
+
+                    googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+                }
+                googleSignInClient.signOut()
                 findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
                 true
             }
@@ -71,15 +84,4 @@ class HomeFragment : Fragment() {
         }
         tabLayoutMediator.attach()
     }
-    private fun deleteAppData() {
-        try {
-            // clearing app data
-            val packageName = context?.packageName
-            val runtime = Runtime.getRuntime()
-            runtime.exec("pm clear $packageName")
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
 }
