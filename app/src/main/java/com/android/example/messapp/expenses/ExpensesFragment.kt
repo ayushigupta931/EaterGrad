@@ -73,13 +73,17 @@ class ExpensesFragment : Fragment() {
         val docref = uid?.let { db.collection("users").document(it).collection("date") }
         var count = 0
         val checkDate = currentDate.subSequence(3, 10) as String
+        val checkDayDate = currentDate.subSequence(0, 2) as String
+        val checkDay = checkDayDate.toInt()
 
         return suspendCoroutine {
             docref?.whereEqualTo(meal, false)?.get()?.addOnSuccessListener { documents ->
                 for (document in documents) {
                     val dateRange = document.getString("date")
-                    val validDate = dateRange?.subSequence(3, 10) as String
-                    if (checkDate == validDate)
+                    val dayDate = dateRange?.subSequence(0, 2) as String
+                    val day = dayDate.toInt()
+                    val validDate = dateRange.subSequence(3, 10) as String
+                    if (day<=checkDay && checkDate == validDate)
                         count++
                 }
                 it.resume(count)
