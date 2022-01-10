@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="action_bar">#00695C</color>
+    <color name="green1">#004D40 </color>
+    <color name="bg">#FFF9C4</color>
+    <color name="cardView">#00796B</color>
+    <color name="cancel">#EF5350</color>
+    <color name="bCard">#b15e6c</color>
+    <color name="lCard">#912f40</color>
+    <color name="dCard">#6D435A</color>
 </resources>
