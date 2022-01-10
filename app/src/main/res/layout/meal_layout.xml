@@ -33,7 +33,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
             android:paddingBottom="5dp"
             android:orientation="vertical">
 
@@ -41,21 +41,28 @@
                 android:id="@+id/meals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Breakfast"
                 android:fontFamily="@font/alegreya_sans_medium"
-                android:textColor="@color/bg"
+                android:textColor="@color/white"
                 android:textSize="45sp" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tea + Apple + Juice + ... "
                 android:ellipsize="end"
-                android:maxLines="3"
+                android:maxLines="1"
                 android:fontFamily="@font/alegreya_sans_medium"
-                android:textColor="@color/bg"
+                android:textColor="@color/white"
                 android:textSize="23sp" />
+
+            <ImageView
+                android:id="@+id/upArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_arrow_drop_up_24"
+                android:visibility="gone"
+                android:layout_gravity="end"
+                />
 
         </LinearLayout>
         </LinearLayout>
