@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Mess App"
+                android:text="EaterGrad"
                 android:fontFamily="@font/alegreya_sans_medium"
                 android:textSize="45sp"
                 android:textStyle="italic"/>
@@ -29,7 +29,7 @@
                 android:textStyle="italic"
                 android:padding="5dp"
                 android:text="Take care of your Finances and Mess Schedules in one place!
-Manually cancelling mess meals costs you time and money and usually results in wasted food. Mess app allows you to easily cancel meals up to 2 hours in advance directly from your phone! "
+Manually cancelling mess meals costs you time and money and usually results in wasted food. EaterGrad allows you to easily cancel meals up to 2 hours in advance directly from your phone! "
                 android:gravity="center"
                 />
 
