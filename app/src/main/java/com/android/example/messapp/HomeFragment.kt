@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeFragment_to_historyFragment)
                 true
             }
-            R.id.aboutFragment -> {
+            R.id.action_about -> {
                 findNavController().navigate(R.id.action_homeFragment_to_aboutFragment)
                 true
             }
