@@ -52,19 +52,10 @@
                 android:layout_height="wrap_content"
                 android:text="Tea + Apple + Juice + ... "
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="3"
                 android:fontFamily="@font/alegreya_sans_medium"
                 android:textColor="@color/bg"
                 android:textSize="23sp" />
-
-            <ImageView
-                android:id="@+id/upArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_drop_up_24"
-                android:visibility="gone"
-                android:layout_gravity="right"
-                />
 
         </LinearLayout>
         </LinearLayout>
