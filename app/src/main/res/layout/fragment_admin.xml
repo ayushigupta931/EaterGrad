@@ -10,21 +10,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="50dp"
+        android:paddingHorizontal="15dp"
+        android:paddingTop="20dp"
         android:paddingBottom="10dp"
         android:orientation="vertical">
 
+
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/todayCount"
             android:fontFamily="@font/alegreya_sans_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="09-01-2022"
+            android:text="Today's count"
             android:textColor="@color/action_bar"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:textSize="38sp"
             android:textStyle="bold" />
 
@@ -41,23 +42,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingHorizontal="30dp"
-                android:paddingVertical="15dp">
+                android:paddingRight="30dp"
+                android:paddingLeft="10dp"
+                android:paddingVertical="5dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/food_4"/>
 
                 <TextView
+                    android:fontFamily="@font/alegreya_sans_medium"
                     android:id="@+id/meals1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Breakfast :"
+                    android:layout_gravity="center"
                     android:textColor="@color/bg"
                     android:textSize="30sp" />
 
                 <TextView
+                    android:fontFamily="@font/alegreya_sans_medium"
                     android:id="@+id/count_breakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
+                    android:layout_gravity="center"
                     android:textColor="@color/bg"
                     android:textSize="30sp" />
 
@@ -79,23 +90,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingHorizontal="30dp"
-                android:paddingVertical="15dp">
+                android:paddingRight="30dp"
+                android:paddingLeft="10dp"
+                android:paddingVertical="5dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/food_3"/>
 
                 <TextView
+                    android:fontFamily="@font/alegreya_sans_medium"
                     android:id="@+id/meals2"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Lunch :"
+                    android:layout_gravity="center"
                     android:textColor="@color/bg"
                     android:textSize="30sp" />
 
                 <TextView
+                    android:fontFamily="@font/alegreya_sans_medium"
                     android:id="@+id/count_lunch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
+                    android:layout_gravity="center"
                     android:textColor="@color/bg"
                     android:textSize="30sp" />
 
@@ -106,7 +127,8 @@
             android:id="@+id/cardDinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="5dp"
             android:backgroundTint="@color/dCard"
             app:cardCornerRadius="30dp"
             app:cardElevation="10dp">
@@ -115,28 +137,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingHorizontal="30dp"
-                android:paddingVertical="15dp">
+                android:paddingRight="30dp"
+                android:paddingLeft="10dp"
+                android:paddingVertical="5dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/food_1"/>
 
                 <TextView
+                    android:fontFamily="@font/alegreya_sans_medium"
                     android:id="@+id/meals3"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Dinner :"
+                    android:layout_gravity="center"
                     android:textColor="@color/bg"
                     android:textSize="30sp"  />
 
                 <TextView
+                    android:fontFamily="@font/alegreya_sans_medium"
                     android:id="@+id/count_dinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
+                    android:layout_gravity="center"
                     android:textColor="@color/bg"
                     android:textSize="30sp"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/shopping"/>
 
     </LinearLayout>
 
