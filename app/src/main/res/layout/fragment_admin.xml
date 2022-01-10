@@ -4,60 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fontFamily="@font/alegreya_sans_medium"
     tools:context=".AdminFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="50dp"
+        android:paddingBottom="10dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Date"
-            android:textSize="45sp"
-            android:textStyle="bold"
             android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="09-01-2022"
+            android:textColor="@color/action_bar"
+            android:layout_marginBottom="20dp"
+            android:textSize="38sp"
+            android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardBreakfast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:backgroundTint="@color/teal_200"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date">
+            android:backgroundTint="@color/bCard"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="15dp">
 
                 <TextView
                     android:id="@+id/meals1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Breakfast:"
-                    android:textColor="@color/black"
-                    android:textSize="45sp" />
+                    android:layout_weight="1"
+                    android:text="Breakfast :"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/count_breakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
                     android:text="5"
-                    android:textColor="@color/black"
-                    android:textSize="45sp" />
+                    android:textColor="@color/bg"
+                    android:textSize="30sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -67,37 +69,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:backgroundTint="@color/teal_200"
-            app:cardCornerRadius="10dp"
+            android:backgroundTint="@color/lCard"
+            app:cardCornerRadius="30dp"
             app:cardElevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardBreakfast">
+            >
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="15dp">
 
                 <TextView
                     android:id="@+id/meals2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Lunch:"
-                    android:textColor="@color/black"
-                    android:textSize="45sp" />
+                    android:text="Lunch :"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/count_lunch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="7"
-                    android:textColor="@color/black"
-                    android:textSize="45sp" />
+                    android:text="5"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -107,41 +107,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:backgroundTint="@color/teal_200"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardLunch">
+            android:backgroundTint="@color/dCard"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="15dp">
 
                 <TextView
                     android:id="@+id/meals3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Dinner:"
-                    android:textColor="@color/black"
-                    android:textSize="45sp" />
+                    android:text="Dinner :"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp"  />
 
                 <TextView
                     android:id="@+id/count_dinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="8"
-                    android:textColor="@color/black"
-                    android:textSize="45sp" />
+                    android:text="5"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </FrameLayout>

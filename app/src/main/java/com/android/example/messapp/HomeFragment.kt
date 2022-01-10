@@ -1,9 +1,11 @@
 package com.android.example.messapp
 
+import android.app.Application
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.android.example.messapp.databinding.FragmentHomeBinding
@@ -22,9 +24,11 @@ import java.lang.Exception
 class HomeFragment : Fragment() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentHomeBinding
+    private val dateViewModel by viewModels<DateViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        dateViewModel.init((activity as AppCompatActivity).applicationContext as Application)
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu, menu)
@@ -40,6 +44,8 @@ class HomeFragment : Fragment() {
                 true
             }
             R.id.action_sign_out-> {
+
+                dateViewModel.deleteAll()
                 Firebase.auth.signOut()
                 lifecycleScope.launch{
                     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
