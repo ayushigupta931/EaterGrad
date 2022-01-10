@@ -6,8 +6,8 @@ import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -88,7 +88,6 @@ class AdminFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = "Mess App"
         val sdf = SimpleDateFormat("dd-MM-yyyy")
         val currentDate = sdf.format(Date())
-        binding.date.text = currentDate.toString()
 
         lifecycleScope.launchWhenCreated {
             val userCount = getUserCount()

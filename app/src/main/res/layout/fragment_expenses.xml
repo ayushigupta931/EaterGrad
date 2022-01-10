@@ -1,163 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
     tools:context=".ExpensesFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardBreakfast"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/teal_200"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
-        android:layout_marginVertical="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/bg"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp">
 
-        <LinearLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_height="150dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/expense_img" />
 
-            <TextView
-                android:id="@+id/meals1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Breakfast:"
-                android:textColor="@color/black"
-                android:textSize="45sp" />
-
-            <TextView
-                android:id="@+id/BfastCnt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:textColor="@color/black"
-                android:textSize="45sp" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardLunch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="30dp"
-        android:backgroundTint="@color/teal_200"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardBreakfast">
-
-
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBreakfast"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/bCard"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="10dp">
 
-            <TextView
-                android:id="@+id/meals2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lunch:"
-                android:textColor="@color/black"
-                android:textSize="45sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="30dp">
 
-            <TextView
-                android:id="@+id/LunchCnt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:textColor="@color/black"
-                android:textSize="45sp" />
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/food_4" />
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/meals1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/alegreya_sans_medium"
+                    android:text="Breakfast :"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardDinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="30dp"
-        android:backgroundTint="@color/teal_200"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardLunch">
+                <TextView
+                    android:id="@+id/BfastCnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp" />
 
-        <LinearLayout
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardLunch"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/lCard"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="10dp">
 
-            <TextView
-                android:id="@+id/meals3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dinner:"
-                android:textColor="@color/black"
-                android:textSize="45sp" />
 
-            <TextView
-                android:id="@+id/DinnerCnt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:textColor="@color/black"
-                android:textSize="45sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="30dp">
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/food_3" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardTotal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="30dp"
-        android:backgroundTint="@color/teal_200"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardDinner">
+                <TextView
+                    android:id="@+id/meals2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/alegreya_sans_medium"
+                    android:text="Lunch :"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp" />
 
-        <LinearLayout
+                <TextView
+                    android:id="@+id/LunchCnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDinner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/dCard"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="10dp">
 
-            <TextView
-                android:id="@+id/total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total:"
-                android:textColor="@color/black"
-                android:textSize="45sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="30dp">
 
-            <TextView
-                android:id="@+id/totalExpense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:textColor="@color/black"
-                android:textSize="45sp" />
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/food_1" />
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/meals3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/alegreya_sans_medium"
+                    android:text="Dinner :"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/DinnerCnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/bg"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:backgroundTint="@color/bg"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/cardview"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="15dp">
+
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/alegreya_sans_medium"
+                    android:text="Total :"
+                    android:textColor="@color/tCard"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/totalExpense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tCard"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>
