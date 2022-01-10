@@ -4,7 +4,10 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -73,6 +76,7 @@ class MealsItemTouchHelper(
         } else { // view is unSwiped
             background.setBounds(0, 0, 0, 0)
         }
+
         background.draw(c)
         icon.draw(c)
     }

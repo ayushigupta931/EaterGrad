@@ -97,18 +97,7 @@ class MealsFragment(private val position: Int) : Fragment() {
                         Log.i("MESS","Late ho gaya bhai decide karne mein")
                     }else{
                         if (viewModel.menuUiModelLiveData.value!![pos].coming) {
-                            val builder = AlertDialog.Builder(recyclerAdapter.context)
-                            builder.setTitle("Delete")
-                            builder.setMessage("Are you sure you want to delete?")
-                            builder.setPositiveButton("Confirm") { _, _ ->
-                                viewModel.updateUserPref(pos, false)
-                            }
-                            builder.setNegativeButton("Cancel") { dialog, _ ->
-                                dialog?.dismiss()
-
-                            }
-                            val dialog = builder.create()
-                            dialog.show()
+                            viewModel.updateUserPref(pos, false)
                         }
                     }
                 }
