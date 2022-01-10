@@ -108,7 +108,7 @@ class LoginFragment : Fragment() {
 
                     } else {
                         binding.progressBar1.visibility = View.GONE
-                        Toast.makeText(requireActivity(), "Sign In failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), "Please check your internet connection!!", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
