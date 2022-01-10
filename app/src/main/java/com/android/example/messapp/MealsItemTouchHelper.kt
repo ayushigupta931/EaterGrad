@@ -1,20 +1,17 @@
 package com.android.example.messapp
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
 class MealsItemTouchHelper(
     private val adapter: MealsListAdapter,
-    private val onSwipeComplete: (Int,Int) -> Unit
+    private val onSwipeComplete: (Int, Int) -> Unit
 ) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
     override fun onMove(
@@ -27,12 +24,8 @@ class MealsItemTouchHelper(
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position = viewHolder.adapterPosition
-//        mAdapter.deleteItem(position)
-
-
-
         adapter.notifyItemChanged(position)
-        onSwipeComplete(position,direction)
+        onSwipeComplete(position, direction)
     }
 
     override fun onChildDraw(

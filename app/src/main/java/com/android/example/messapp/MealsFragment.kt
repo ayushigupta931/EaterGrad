@@ -2,24 +2,21 @@ package com.android.example.messapp
 
 import android.app.AlertDialog
 import android.app.Application
-import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.map
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.launch
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MealsFragment(private val position: Int) : Fragment() {
     private val viewModel by viewModels<FirestoreDataFetch>() {
@@ -52,35 +49,89 @@ class MealsFragment(private val position: Int) : Fragment() {
             progressBar.visibility = View.GONE
 
         }
-        val itemTouchHelper = ItemTouchHelper(MealsItemTouchHelper(recyclerAdapter) { pos, dir ->
-            when(dir){
-                ItemTouchHelper.RIGHT -> {
-                    if(viewModel.menuUiModelLiveData.value!![pos].coming){
-                        val builder = AlertDialog.Builder(recyclerAdapter.context)
-                        builder.setTitle("Delete")
-                        builder.setMessage("Are you sure you want to delete?")
-                        builder.setPositiveButton("Confirm") { _, _ ->
-                            viewModel.updateUserPref(pos,false)
-                        }
-                        builder.setNegativeButton("Cancel") { dialog, _ ->
-                            dialog?.dismiss()
+        val format: DateFormat = SimpleDateFormat("dd-MM-yyyy")
+        val calendar = Calendar.getInstance()
+        calendar.firstDayOfWeek = Calendar.MONDAY
+        calendar[Calendar.DAY_OF_WEEK] = Calendar.MONDAY
 
+        val days = arrayOfNulls<String>(7)
+        for (i in 0..6) {
+            days[i] = format.format(calendar.time)
+            calendar.add(Calendar.DAY_OF_MONTH, 1)
+        }
+        val date = days[position]
+
+        val c: Calendar = Calendar.getInstance()
+        c[Calendar.HOUR_OF_DAY] = 0 //anything 0 - 23
+        c[Calendar.MINUTE] = 0
+        c[Calendar.SECOND] = 0
+        if (date != null) {
+            c[Calendar.DAY_OF_MONTH] = date.subSequence(0,2).toString().toInt()
+            c[Calendar.MONTH] = date.subSequence(3,5).toString().toInt()-1
+            c[Calendar.YEAR] = date.subSequence(6,10).toString().toInt()
+        }
+        val difference = (Calendar.getInstance().timeInMillis - c.timeInMillis)/1000
+        Log.i("D1",difference.toString())
+        var mealTime=-1
+
+        val itemTouchHelper = ItemTouchHelper(MealsItemTouchHelper(recyclerAdapter) { pos, dir ->
+            mealTime = when (pos) {
+                0 -> {
+                    21600
+                }
+                1 -> {
+                    43200
+                }
+                2 -> {
+                    61200
+                }
+                else -> 0
+            }
+            when (dir) {
+                ItemTouchHelper.RIGHT -> {
+                    if(difference>mealTime){
+                        val builder = AlertDialog.Builder(recyclerAdapter.context)
+                        builder.setTitle("Warning")
+                        builder.setMessage("You cannot update this meal now")
+                        builder.create().show()
+                        Log.i("MESS","Late ho gaya bhai decide karne mein")
+                    }else{
+                        if (viewModel.menuUiModelLiveData.value!![pos].coming) {
+                            val builder = AlertDialog.Builder(recyclerAdapter.context)
+                            builder.setTitle("Delete")
+                            builder.setMessage("Are you sure you want to delete?")
+                            builder.setPositiveButton("Confirm") { _, _ ->
+                                viewModel.updateUserPref(pos, false)
+                            }
+                            builder.setNegativeButton("Cancel") { dialog, _ ->
+                                dialog?.dismiss()
+
+                            }
+                            val dialog = builder.create()
+                            dialog.show()
                         }
-                        val dialog = builder.create()
-                        dialog.show()
+                    }
+                }
+                ItemTouchHelper.LEFT -> {
+                    if(difference>mealTime){
+                        val builder = AlertDialog.Builder(recyclerAdapter.context)
+                        builder.setTitle("Warning")
+                        builder.setMessage("You cannot update this meal now")
+                        builder.create().show()
+                        Log.i("MESS","Late ho gaya bhai decide karne mein")
+                    }else{
+                        if (!viewModel.menuUiModelLiveData.value!![pos].coming)
+                            viewModel.updateUserPref(pos, true)
                     }
 
                 }
 
-                ItemTouchHelper.LEFT->{
-                    if(!viewModel.menuUiModelLiveData.value!![pos].coming)
-                    viewModel.updateUserPref(pos,true)
-                }
-
             }
+            return@MealsItemTouchHelper difference <= mealTime
 
         })
         itemTouchHelper.attachToRecyclerView(recyclerView)
+
         viewModel.position = pos
         return view
     }
