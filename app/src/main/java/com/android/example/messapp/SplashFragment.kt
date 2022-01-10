@@ -35,7 +35,7 @@ class SplashFragment : Fragment() {
         if (currentUser == null)
             Handler(Looper.getMainLooper()).postDelayed(
                 { findNavController().navigate(R.id.action_splashFragment_to_loginFragment) },
-                1500) // start login activity
+                500) // start login activity
         else
         {
             lifecycleScope.launchWhenCreated {
@@ -43,11 +43,11 @@ class SplashFragment : Fragment() {
                 if(role == 1)
                     Handler(Looper.getMainLooper()).postDelayed(
                         { findNavController().navigate(R.id.action_splashFragment_to_adminFragment) },
-                        1500)
+                        500)
                 else
                     Handler(Looper.getMainLooper()).postDelayed(
                         { findNavController().navigate(R.id.action_splashFragment_to_homeFragment2) },
-                        1500)
+                        500)
             }
         }
     }
