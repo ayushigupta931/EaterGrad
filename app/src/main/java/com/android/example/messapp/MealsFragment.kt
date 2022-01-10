@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -90,11 +91,7 @@ class MealsFragment(private val position: Int) : Fragment() {
             when (dir) {
                 ItemTouchHelper.RIGHT -> {
                     if(difference>mealTime){
-                        val builder = AlertDialog.Builder(recyclerAdapter.context)
-                        builder.setTitle("Warning")
-                        builder.setMessage("You cannot update this meal now")
-                        builder.create().show()
-                        Log.i("MESS","Late ho gaya bhai decide karne mein")
+                        Snackbar.make(requireView(),"You cannot update this meal now",Snackbar.LENGTH_SHORT).show()
                     }else{
                         if (viewModel.menuUiModelLiveData.value!![pos].coming) {
                             viewModel.updateUserPref(pos, false)
@@ -103,11 +100,7 @@ class MealsFragment(private val position: Int) : Fragment() {
                 }
                 ItemTouchHelper.LEFT -> {
                     if(difference>mealTime){
-                        val builder = AlertDialog.Builder(recyclerAdapter.context)
-                        builder.setTitle("Warning")
-                        builder.setMessage("You cannot update this meal now")
-                        builder.create().show()
-                        Log.i("MESS","Late ho gaya bhai decide karne mein")
+                        Snackbar.make(requireView(),"You cannot update this meal now",Snackbar.LENGTH_SHORT).show()
                     }else{
                         if (!viewModel.menuUiModelLiveData.value!![pos].coming)
                             viewModel.updateUserPref(pos, true)
