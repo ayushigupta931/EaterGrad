@@ -8,6 +8,21 @@
     <string name="dinner">Dinner :</string>
     <string name="total">Total :</string>
     <string name="code"><![CDATA[</>]]></string>
+    <string name="intro">Take care of your Finances and Mess Schedules in one place! Manually cancelling mess meals costs you time and money and usually results in wasted food. EaterGrad allows you to easily cancel meals up to 2 hours in advance directly from your phone!</string>
+    <string name="left_swipe">Left Swipe</string>
+    <string name="left_swipe_info">Swipe left to inform us that you will have your meal at the Mess.</string>
+    <string name="right_swipe">Right Swipe</string>
+    <string name="right_swipe_info">Swipe right to cancel and inform us that you won’t be available for a meal.</string>
+    <string name="wallet">Wallet</string>
+    <string name="wallet_info">See all your expenses for the meals you’ve had till date.</string>
+    <string name="history">History</string>
+    <string name="history_info">We maintain a record of all your cancelled meals so that you never have to worry about a missed expense.</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_out_info">Sign out of the application. [Note that this also deletes meal history from your device.]</string>
+    <string name="cost_of_meals">Cost of Meals</string>
+    <string name="cost_info">Currently, the meals are being served at the following prices:\nBreakfast: ₹25\nLunch: ₹40\nDinner: ₹45</string>
+    <string name="with">with</string>
+    <string name="and">and</string>
     <array name="days">
         <item>Monday</item>
         <item>Tuesday</item>
