@@ -35,8 +35,14 @@ class FirestoreDataFetch(application: Application) : ViewModel() {
 
     private val dayFlow = MutableStateFlow("")
     private val menuFlow = dayFlow.map {
-        val docRef = db.collection("menu").document(it.lowercase())
-        docRef.get().await().toObject<MenuModel>()
+        try{
+            val docRef = db.collection("menu").document(it.lowercase())
+            docRef.get().await().toObject<MenuModel>()
+        }
+        catch (e:Exception){
+            null
+        }
+
     }
 
     private val dateFlow = dayFlow.flatMapLatest {
@@ -57,6 +63,7 @@ class FirestoreDataFetch(application: Application) : ViewModel() {
     }
 
     val menuUiModelLiveData = menuFlow.combine(dateFlow) { menu, date ->
+        menu?:return@combine null
         listOf(
             MenuUiModel(
                 "Breakfast",

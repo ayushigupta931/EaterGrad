@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-
 class SplashFragment : Fragment() {
 
     override fun onCreateView(
@@ -34,6 +33,8 @@ class SplashFragment : Fragment() {
         val auth: FirebaseAuth = Firebase.auth
         val currentUser = auth.currentUser
         val userViewmodel by viewModels<UserViewmodel>()
+
+
         if (currentUser == null)
             Handler(Looper.getMainLooper()).postDelayed(
                 { findNavController().navigate(R.id.action_splashFragment_to_loginFragment) },

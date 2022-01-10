@@ -22,4 +22,5 @@
         <item>Lunch</item>
         <item>Dinner</item>
     </array>
+    <string name="welcome">Welcome to EaterGrad!</string>
 </resources>
