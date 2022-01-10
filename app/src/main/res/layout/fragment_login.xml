@@ -30,6 +30,7 @@
             android:visibility="invisible"/>
 
         <Button
+            android:fontFamily="@font/alegreya_sans_medium"
             android:id="@+id/googleSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -38,7 +38,7 @@ class LoginFragment : Fragment() {
                     val account = task.getResult(ApiException::class.java)
                     firebaseAuthWithGoogle(account?.idToken!!)
                 } catch (e: ApiException) {
-                    binding.progressBar1.visibility = View.GONE
+                    binding.progressBar1.visibility = View.INVISIBLE
                     Toast.makeText(requireActivity(), "Sign In failed", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -85,7 +85,7 @@ class LoginFragment : Fragment() {
             auth.signInWithCredential(credential)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
-                        binding.progressBar1.visibility = View.GONE
+                        binding.progressBar1.visibility = View.INVISIBLE
                         Toast.makeText(
                             requireActivity(),
                             "Signed in successfully!",
@@ -109,7 +109,7 @@ class LoginFragment : Fragment() {
 
 
                     } else {
-                        binding.progressBar1.visibility = View.GONE
+                        binding.progressBar1.visibility = View.INVISIBLE
                         Toast.makeText(
                             requireActivity(),
                             "Please check your internet connection!!",

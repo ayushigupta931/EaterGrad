@@ -3,6 +3,7 @@ package com.android.example.messapp
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Paint
 import android.text.TextUtils
 import android.transition.AutoTransition
 import android.transition.TransitionManager
@@ -36,12 +37,14 @@ class MealsListAdapter(val context: Context?) :
         var mealsTxt: TextView
         var descriptionMeal: TextView
         var upArrow: ImageView
+        var mealImage: ImageView
 
         init {
             cardView = view.findViewById(R.id.cardView)
             mealsTxt= view.findViewById(R.id.meals)
             descriptionMeal = view.findViewById(R.id.description)
             upArrow = view.findViewById(R.id.upArrow)
+            mealImage = view.findViewById(R.id.mealImage)
 
             cardView.setOnClickListener {
                 if(descriptionMeal.maxLines == 1){
@@ -74,10 +77,27 @@ class MealsListAdapter(val context: Context?) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.mealsTxt.text = list[position].title
         holder.descriptionMeal.text = list[position].menu.joinToString(" + ")
-        if(list[position].coming){
-           holder.cardView.background.setTint(Color.GREEN)
-        }else{
-            holder.cardView.background.setTint(Color.RED)
+        if(!(list[position].coming))
+            holder.mealsTxt.paintFlags = holder.mealsTxt.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG
+        else
+            holder.mealsTxt.paintFlags = 0
+
+        when(position){
+            0->{
+                holder.mealImage.setImageDrawable(context?.let { ContextCompat.getDrawable(it,R.drawable.food_4) })
+                context?.let { ContextCompat.getColor(it,R.color.bCard) }
+                    ?.let { holder.cardView.background.setTint(it) }
+            }
+            1->{
+                holder.mealImage.setImageDrawable(context?.let { ContextCompat.getDrawable(it,R.drawable.food_3) })
+                context?.let { ContextCompat.getColor(it,R.color.lCard) }
+                    ?.let { holder.cardView.background.setTint(it) }
+            }
+            2->{
+                holder.mealImage.setImageDrawable(context?.let { ContextCompat.getDrawable(it,R.drawable.food_1) })
+                context?.let { ContextCompat.getColor(it,R.color.dCard) }
+                    ?.let { holder.cardView.background.setTint(it) }
+            }
         }
     }
 
