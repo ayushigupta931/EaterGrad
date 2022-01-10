@@ -2,13 +2,13 @@ package com.android.example.messapp
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -20,8 +20,6 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
@@ -51,7 +49,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentLoginBinding.inflate(inflater,container,false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -64,7 +62,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun createRequest() {
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.web_client_id))
                 .requestEmail()
@@ -75,29 +73,33 @@ class LoginFragment : Fragment() {
     }
 
     private fun signIn() {
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             val signInIntent = googleSignInClient.signInIntent
             getActivityResult.launch(signInIntent)
         }
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             val credential = GoogleAuthProvider.getCredential(idToken, null)
             auth.signInWithCredential(credential)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
                         binding.progressBar1.visibility = View.GONE
-                        Toast.makeText(requireActivity(), "Signed in successfully!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireActivity(),
+                            "Signed in successfully!",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                         lifecycleScope.launchWhenCreated {
                             val role = auth.currentUser?.email?.let { userViewmodel.checkRole(it) }
-                            if(role == 1)
+                            if (role == 1)
                                 findNavController().navigate(R.id.action_loginFragment_to_adminFragment)
-                            else
-                            {
-                                if(userViewmodel.isNewUser(auth.uid)){
-                                    userViewmodel.createNewUser(auth.uid, auth.currentUser?.displayName,
+                            else {
+                                if (userViewmodel.isNewUser(auth.uid)) {
+                                    userViewmodel.createNewUser(
+                                        auth.uid, auth.currentUser?.displayName,
                                         auth.currentUser?.email
                                     )
                                 }
@@ -108,7 +110,11 @@ class LoginFragment : Fragment() {
 
                     } else {
                         binding.progressBar1.visibility = View.GONE
-                        Toast.makeText(requireActivity(), "Sign In failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireActivity(),
+                            "Please check your internet connection!!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
         }
