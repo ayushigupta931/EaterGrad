@@ -6,7 +6,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -22,6 +24,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.Date
+import kotlin.collections.HashMap
 
 
 class FirestoreDataFetch (application: Application): ViewModel() {
@@ -87,12 +90,37 @@ class FirestoreDataFetch (application: Application): ViewModel() {
         val lunch = if(position==1) choice else currentMenu[1].coming
         val dinner = if(position==2) choice else currentMenu[2].coming
         val newMenu = mDate(date!!,breakfast, lunch, dinner)
+
         viewModelScope.launch {
+            var b : Long =0;
+            var l : Long =0;
+            var d : Long =0;
+
+            if(breakfast != currentMenu[0].coming){
+                b = if(breakfast) -1
+                else 1
+            }
+            if(lunch != currentMenu[1].coming){
+                l = if(lunch) -1
+                else 1
+            }
+            if(dinner != currentMenu[2].coming){
+                d = if(dinner) -1
+                else 1
+            }
+            val docRef = db.collection("absent").document(date!!)
+//            if(docRef.get()!=null)
+            Log.i("ABSENT", docRef.toString())
+
+            docRef.set(mapOf("date" to date!!), SetOptions.merge())
+            docRef.update("breakfast",FieldValue.increment(b),
+                "lunch",FieldValue.increment(l),
+                            "dinner",FieldValue.increment(d))
+
             db.collection("users").document(Firebase.auth.currentUser!!.uid)
                 .collection("date").document(date!!).set(newMenu).await()
         }
     }
-
 }
 class FirebaseDataFetchViewModelFactory(private val application: Application): ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
