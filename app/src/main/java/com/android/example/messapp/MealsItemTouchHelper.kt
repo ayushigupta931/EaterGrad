@@ -47,11 +47,11 @@ class MealsItemTouchHelper(
         val backgroundCornerOffset = 20
         if (dX > 0) {
             icon = ContextCompat.getDrawable(adapter.context!!, R.drawable.ic_cancel)
-            background = ColorDrawable(Color.RED)
+            background = ColorDrawable(ContextCompat.getColor(adapter.context, R.color.cancel))
 
         } else {
             icon = ContextCompat.getDrawable(adapter.context!!, R.drawable.ic_check)
-            background = ColorDrawable(Color.GREEN)
+            background = ColorDrawable(ContextCompat.getColor(adapter.context, R.color.tick))
         }
         assert(icon != null)
         val iconMargin: Int = (itemView.getHeight() - icon!!.intrinsicHeight) / 2
@@ -64,8 +64,7 @@ class MealsItemTouchHelper(
             background.setBounds(
                 itemView.getLeft(), itemView.getTop(),
                 itemView.getLeft() + dX.toInt() + backgroundCornerOffset, itemView.getBottom()
-            )
-        } else if (dX < 0) { // Swiping to the left
+            )        } else if (dX < 0) { // Swiping to the left
             val iconLeft: Int = itemView.getRight() - iconMargin - icon.intrinsicWidth
             val iconRight: Int = itemView.getRight() - iconMargin
             icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)

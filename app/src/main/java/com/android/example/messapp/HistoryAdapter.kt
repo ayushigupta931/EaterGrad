@@ -5,38 +5,39 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.messapp.databinding.HistoryCardviewBinding
 
-class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
-    private var mDates:List<mDate>  = emptyList<mDate>()
+class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+    private var mDates: List<mDate> = emptyList<mDate>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ):HistoryAdapter.ViewHolder {
-        val binding = HistoryCardviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    ): HistoryAdapter.ViewHolder {
+        val binding =
+            HistoryCardviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: HistoryAdapter.ViewHolder, position: Int) {
-        with(holder){
-            with(mDates[position]){
+        with(holder) {
+            with(mDates[position]) {
                 binding.date.text = this.date
-                if(this.breakfast){
-                    binding.breakfast.text="Breakfast: Done"
-                }else{
-                    binding.breakfast.text="Breakfast: Cancelled"
+                if (this.breakfast) {
+                    binding.breakfast.text = "Done"
+                } else {
+                    binding.breakfast.text = "Cancelled"
                 }
 
-                if(this.lunch){
-                    binding.lunch.text="Lunch: Done"
-                }else{
-                    binding.lunch.text="Lunch: Cancelled"
+                if (this.lunch) {
+                    binding.lunch.text = "Done"
+                } else {
+                    binding.lunch.text = "Cancelled"
                 }
 
-                if(this.dinner){
-                    binding.dinner.text="Dinner: Done"
-                }else{
-                    binding.dinner.text="Dinner: Cancelled"
+                if (this.dinner) {
+                    binding.dinner.text = "Done"
+                } else {
+                    binding.dinner.text = "Cancelled"
                 }
             }
         }
@@ -46,11 +47,14 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
     override fun getItemCount(): Int {
         return mDates.size
     }
-    fun setDates(mDates: List<mDate>){
+
+    fun setDates(mDates: List<mDate>) {
         this.mDates = mDates
         notifyDataSetChanged()
     }
-    inner class ViewHolder(val binding: HistoryCardviewBinding): RecyclerView.ViewHolder(binding.root){
+
+    inner class ViewHolder(val binding: HistoryCardviewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
 
     }
