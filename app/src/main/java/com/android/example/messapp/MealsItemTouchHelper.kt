@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MealsItemTouchHelper(
     private val adapter: MealsListAdapter,
-    private val onSwipeComplete: (Int, Int) -> Unit
+    private val onSwipeComplete: (Int, Int) -> Boolean
 ) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
     override fun onMove(

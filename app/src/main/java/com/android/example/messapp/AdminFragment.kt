@@ -43,6 +43,7 @@ class AdminFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+
             R.id.action_sign_out -> {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Sign Out")

@@ -2,24 +2,18 @@ package com.android.example.messapp
 
 import android.app.AlertDialog
 import android.app.Application
-import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.map
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -67,7 +61,7 @@ class MealsFragment(private val position: Int) : Fragment() {
         }
         val date = days[position]
 
-        val c: Calendar = GregorianCalendar()
+        val c: Calendar = Calendar.getInstance()
         c[Calendar.HOUR_OF_DAY] = 0 //anything 0 - 23
         c[Calendar.MINUTE] = 0
         c[Calendar.SECOND] = 0
@@ -76,31 +70,32 @@ class MealsFragment(private val position: Int) : Fragment() {
             c[Calendar.MONTH] = date.subSequence(3,5).toString().toInt()-1
             c[Calendar.YEAR] = date.subSequence(6,10).toString().toInt()
         }
-        val d1 = (Calendar.getInstance().timeInMillis - c.timeInMillis)/1000
-        var meal=-1
+        val difference = (Calendar.getInstance().timeInMillis - c.timeInMillis)/1000
+        Log.i("D1",difference.toString())
+        var mealTime=-1
 
-            val itemTouchHelper = ItemTouchHelper(MealsItemTouchHelper(recyclerAdapter) { pos, dir ->
-                //Breakfast - 8am  => 6 hrs
-                //Lunch - 2pm => 12 hrs
-                //Dinner - 7pm => 17 hrs
-
-                if(pos==0){
-                    meal=26100
-                }else if(pos==1){
-                    meal=52200
-                }else{
-                    meal=61200
+        val itemTouchHelper = ItemTouchHelper(MealsItemTouchHelper(recyclerAdapter) { pos, dir ->
+            mealTime = when (pos) {
+                0 -> {
+                    21600
                 }
-                when (dir) {
+                1 -> {
+                    43200
+                }
+                2 -> {
+                    61200
+                }
+                else -> 0
+            }
+            when (dir) {
                 ItemTouchHelper.RIGHT -> {
-                    Log.i("MESS",meal.toString())
-                    if(d1>meal){
-                        //TODO alert dialog for late
+                    if(difference>mealTime){
+                        val builder = AlertDialog.Builder(recyclerAdapter.context)
+                        builder.setTitle("Warning")
+                        builder.setMessage("You cannot update this meal now")
+                        builder.create().show()
                         Log.i("MESS","Late ho gaya bhai decide karne mein")
-                    }
-                    else
-                    {
-
+                    }else{
                         if (viewModel.menuUiModelLiveData.value!![pos].coming) {
                             val builder = AlertDialog.Builder(recyclerAdapter.context)
                             builder.setTitle("Delete")
@@ -110,28 +105,33 @@ class MealsFragment(private val position: Int) : Fragment() {
                             }
                             builder.setNegativeButton("Cancel") { dialog, _ ->
                                 dialog?.dismiss()
+
                             }
                             val dialog = builder.create()
                             dialog.show()
                         }
                     }
-
                 }
-
                 ItemTouchHelper.LEFT -> {
-                    if(d1>meal){
-                        //TODO alert dialog for late
+                    if(difference>mealTime){
+                        val builder = AlertDialog.Builder(recyclerAdapter.context)
+                        builder.setTitle("Warning")
+                        builder.setMessage("You cannot update this meal now")
+                        builder.create().show()
                         Log.i("MESS","Late ho gaya bhai decide karne mein")
                     }else{
                         if (!viewModel.menuUiModelLiveData.value!![pos].coming)
                             viewModel.updateUserPref(pos, true)
                     }
+
                 }
 
             }
+            return@MealsItemTouchHelper difference <= mealTime
 
         })
-            itemTouchHelper.attachToRecyclerView(recyclerView)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
         viewModel.position = pos
         return view
     }
