@@ -3,7 +3,7 @@
 <b> Problem Statement: </b>
 
 Many concerns have arisen as a result of our students dining in college mess over a long period of time. One of the obstacles they confront on a daily basis is communicating their presence for the meal during meal hours. On the other side, the mess administration is uncertain of the number of students who will be having a certain meal, resulting in food waste.
-Technology plays an important role inÂ everyday activities, which has resulted in significant changes in various work domains, one of which is the Mobile Application. Mobile applications, which are extensively utilised and known for their ease of use, can be employed efficiently for this job.
+Technology plays an important role in everyday activities, which has resulted in significant changes in various work domains, one of which is the Mobile Application. Mobile applications, which are extensively utilised and known for their ease of use, can be employed efficiently for this job.
 
 <b> Proposed Solution : </b>
 
