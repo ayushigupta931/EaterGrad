@@ -6,7 +6,7 @@
     app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.android.example.messapp.LoginFragment"
+        android:name="com.android.example.messapp.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.android.example.messapp.SplashFragment"
+        android:name="com.android.example.messapp.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.android.example.messapp.HomeFragment"
+        android:name="com.android.example.messapp.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -63,12 +63,12 @@
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.android.example.messapp.HistoryFragment"
+        android:name="com.android.example.messapp.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/adminFragment"
-        android:name="com.android.example.messapp.AdminFragment"
+        android:name="com.android.example.messapp.admin.AdminFragment"
         android:label="fragment_admin"
         tools:layout="@layout/fragment_admin" >
         <action
@@ -79,12 +79,12 @@
     </fragment>
     <fragment
         android:id="@+id/expensesFragment"
-        android:name="com.android.example.messapp.ExpensesFragment"
+        android:name="com.android.example.messapp.expenses.ExpensesFragment"
         android:label="fragment_expenses"
         tools:layout="@layout/fragment_expenses" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.android.example.messapp.AboutFragment"
+        android:name="com.android.example.messapp.about.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
 </navigation>

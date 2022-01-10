@@ -1,6 +1,5 @@
-package com.android.example.messapp
+package com.android.example.messapp.meal
 
-import android.app.AlertDialog
 import android.app.Application
 import android.os.Bundle
 import android.util.Log
@@ -14,13 +13,17 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.example.messapp.FirebaseDataFetchViewModelFactory
+import com.android.example.messapp.FirestoreDataFetch
+import com.android.example.messapp.R
+import com.android.example.messapp.data.DateViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MealsFragment(private val position: Int) : Fragment() {
-    private val viewModel by viewModels<FirestoreDataFetch>() {
+    private val viewModel by viewModels<FirestoreDataFetch> {
         FirebaseDataFetchViewModelFactory(
             requireActivity().application
         )
@@ -63,17 +66,16 @@ class MealsFragment(private val position: Int) : Fragment() {
         val date = days[position]
 
         val c: Calendar = Calendar.getInstance()
-        c[Calendar.HOUR_OF_DAY] = 0 //anything 0 - 23
+        c[Calendar.HOUR_OF_DAY] = 0
         c[Calendar.MINUTE] = 0
         c[Calendar.SECOND] = 0
         if (date != null) {
-            c[Calendar.DAY_OF_MONTH] = date.subSequence(0,2).toString().toInt()
-            c[Calendar.MONTH] = date.subSequence(3,5).toString().toInt()-1
-            c[Calendar.YEAR] = date.subSequence(6,10).toString().toInt()
+            c[Calendar.DAY_OF_MONTH] = date.subSequence(0, 2).toString().toInt()
+            c[Calendar.MONTH] = date.subSequence(3, 5).toString().toInt() - 1
+            c[Calendar.YEAR] = date.subSequence(6, 10).toString().toInt()
         }
-        val difference = (Calendar.getInstance().timeInMillis - c.timeInMillis)/1000
-        Log.i("D1",difference.toString())
-        var mealTime=-1
+        val difference = (Calendar.getInstance().timeInMillis - c.timeInMillis) / 1000
+        var mealTime = -1
 
         val itemTouchHelper = ItemTouchHelper(MealsItemTouchHelper(recyclerAdapter) { pos, dir ->
             mealTime = when (pos) {
@@ -90,18 +92,26 @@ class MealsFragment(private val position: Int) : Fragment() {
             }
             when (dir) {
                 ItemTouchHelper.RIGHT -> {
-                    if(difference>mealTime){
-                        Snackbar.make(requireView(),"You cannot update this meal now",Snackbar.LENGTH_SHORT).show()
-                    }else{
+                    if (difference > mealTime) {
+                        Snackbar.make(
+                            requireView(),
+                            "You cannot update this meal now",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    } else {
                         if (viewModel.menuUiModelLiveData.value!![pos].coming) {
                             viewModel.updateUserPref(pos, false)
                         }
                     }
                 }
                 ItemTouchHelper.LEFT -> {
-                    if(difference>mealTime){
-                        Snackbar.make(requireView(),"You cannot update this meal now",Snackbar.LENGTH_SHORT).show()
-                    }else{
+                    if (difference > mealTime) {
+                        Snackbar.make(
+                            requireView(),
+                            "You cannot update this meal now",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    } else {
                         if (!viewModel.menuUiModelLiveData.value!![pos].coming)
                             viewModel.updateUserPref(pos, true)
                     }

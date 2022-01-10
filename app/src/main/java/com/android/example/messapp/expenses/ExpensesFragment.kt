@@ -1,4 +1,4 @@
-package com.android.example.messapp
+package com.android.example.messapp.expenses
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -25,11 +25,6 @@ class ExpensesFragment : Fragment() {
     private lateinit var binding: FragmentExpensesBinding
     private val sdf = SimpleDateFormat("dd-MM-yyyy")
     private var currentDate = sdf.format(Date())
-    /* Breakfast Expense = 25
-       Lunch Expense = 40
-       Dinner Expense = 45
-     */
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

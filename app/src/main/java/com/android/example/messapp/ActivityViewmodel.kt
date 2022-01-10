@@ -4,32 +4,31 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.example.messapp.data.DateViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class ActivityViewmodel:ViewModel() {
+class ActivityViewmodel : ViewModel() {
 
 
     fun init(application: Application) {
         viewModelScope.launch {
-            firebaseUserFlow().collect { user->
-                user?:return@collect
+            firebaseUserFlow().collect { user ->
+                user ?: return@collect
                 val db = FirebaseFirestore.getInstance()
 
-                val TAG="MessApp"
-                val dateViewModel =DateViewModel()
+                val TAG = "MessApp"
+                val dateViewModel = DateViewModel()
                 dateViewModel.init(application)
-                val dateRef= user.uid.let {
+                val dateRef = user.uid.let {
                     db.collection("users")
                         .document(it).collection("date")
                 }
-//                val date= Date("08-01-2022",true,false,true)
-//                dateViewModel.insert(date)
 
                 dateRef.addSnapshotListener { value, error ->
-                    value?:return@addSnapshotListener
+                    value ?: return@addSnapshotListener
                     for (document in value.documents) {
                         dateViewModel.insert(document.toObject()!!)
                         Log.d(TAG, "${document.id} => ${document.data}")

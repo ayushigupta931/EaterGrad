@@ -1,13 +1,12 @@
-package com.android.example.messapp
+package com.android.example.messapp.about
 
-import android.app.Application
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import com.android.example.messapp.R
 
 class AboutFragment : Fragment() {
 
@@ -16,7 +15,6 @@ class AboutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_about, container, false)
     }
 
@@ -24,5 +22,5 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         (activity as AppCompatActivity).supportActionBar?.title = "About"
-        }
+    }
 }

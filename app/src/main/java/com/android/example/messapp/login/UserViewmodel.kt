@@ -1,28 +1,21 @@
-package com.android.example.messapp
+package com.android.example.messapp.login
 
-import android.app.Application
 import android.content.ContentValues
 import android.util.Log
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.launch
-import com.google.firebase.firestore.DocumentSnapshot
-
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.launch
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 
-class UserViewmodel() : ViewModel() {
+class UserViewmodel : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     private val userRef: CollectionReference = db.collection("users")
 

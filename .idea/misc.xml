@@ -3,16 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android Studio Projects/MessApp/app/src/main/res/layout/activity_main.xml" value="0.2535885167464115" />
-        <entry key="..\:/Android Studio Projects/MessApp/app/src/main/res/layout/fragment_admin.xml" value="0.264" />
-        <entry key="..\:/Android Studio Projects/MessApp/app/src/main/res/layout/fragment_expenses.xml" value="0.25" />
-        <entry key="..\:/Android Studio Projects/MessApp/app/src/main/res/layout/fragment_login.xml" value="0.2" />
-        <entry key="..\:/Android Studio Projects/MessApp/app/src/main/res/layout/fragment_meals.xml" value="0.234375" />
-        <entry key="..\:/Android Studio Projects/MessApp/app/src/main/res/layout/history_cardview.xml" value="0.25" />
-        <entry key="..\:/Android Studio Projects/MessApp/app/src/main/res/layout/meal_layout.xml" value="0.234375" />
+        <entry key="..\:/Android Studio Projects/MessApp/app/src/main/res/layout/activity_main.xml" value="0.15989583333333332" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/Mess_App/app/src/main/res/layout/fragment_history.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/Mess_App/app/src/main/res/layout/history_cardview.xml" value="0.22" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/Mess_App/app/src/main/res/menu/menu.xml" value="0.1796875" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/drawable/app_icon_background.xml" value="0.3158974358974359" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/drawable/cardview.xml" value="0.16770833333333332" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/drawable/ic_cancel.xml" value="0.22395833333333334" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/drawable/ic_check.xml" value="0.22395833333333334" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/drawable/ic_clear.xml" value="0.2703125" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/drawable/ic_cross.xml" value="0.32083333333333336" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/layout/fragment_home.xml" value="0.1983695652173913" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/layout/fragment_meals.xml" value="0.14817629179331307" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/layout/fragment_splash.xml" value="0.5" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/layout/meal_layout.xml" value="0.268" />
+        <entry key="..\:/puran/AndroidProjects/MessApp/Mess_App/app/src/main/res/layout/warning_dialog.xml" value="0.36" />
       </map>
     </option>
   </component>

@@ -1,16 +1,18 @@
-package com.android.example.messapp
+package com.android.example.messapp.splash
 
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.android.example.messapp.R
+import com.android.example.messapp.login.UserViewmodel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -35,19 +37,21 @@ class SplashFragment : Fragment() {
         if (currentUser == null)
             Handler(Looper.getMainLooper()).postDelayed(
                 { findNavController().navigate(R.id.action_splashFragment_to_loginFragment) },
-                500) // start login activity
-        else
-        {
+                500
+            )
+        else {
             lifecycleScope.launchWhenCreated {
                 val role = auth.currentUser?.email?.let { userViewmodel.checkRole(it) }
-                if(role == 1)
+                if (role == 1)
                     Handler(Looper.getMainLooper()).postDelayed(
                         { findNavController().navigate(R.id.action_splashFragment_to_adminFragment) },
-                        500)
+                        500
+                    )
                 else
                     Handler(Looper.getMainLooper()).postDelayed(
                         { findNavController().navigate(R.id.action_splashFragment_to_homeFragment2) },
-                        500)
+                        500
+                    )
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.android.example.messapp
+package com.android.example.messapp.login
 
 import android.app.Activity
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.android.example.messapp.R
 import com.android.example.messapp.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -57,7 +58,10 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         auth = Firebase.auth
-        binding.googleSignIn.setOnClickListener { signIn() }
+        binding.googleSignIn.setOnClickListener {
+            signIn()
+            binding.progressBar1.visibility = View.VISIBLE
+        }
         createRequest()
     }
 

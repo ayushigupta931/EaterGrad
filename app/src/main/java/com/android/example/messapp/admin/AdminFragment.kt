@@ -1,4 +1,4 @@
-package com.android.example.messapp
+package com.android.example.messapp.admin
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.android.example.messapp.R
+import com.android.example.messapp.data.DateViewModel
 import com.android.example.messapp.databinding.FragmentAdminBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient

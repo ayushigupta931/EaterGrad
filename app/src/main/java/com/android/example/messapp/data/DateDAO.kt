@@ -1,7 +1,8 @@
-package com.android.example.messapp
+package com.android.example.messapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.android.example.messapp.models.mDate
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,6 +23,6 @@ interface DateDAO {
     fun getAllDates(): LiveData<List<mDate>>
 
     @Query("SELECT * FROM date WHERE date = :date")
-    fun getDate(date:String):Flow<mDate?>
+    fun getDate(date: String): Flow<mDate?>
 
 }

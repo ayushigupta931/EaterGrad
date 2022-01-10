@@ -1,9 +1,10 @@
-package com.android.example.messapp
+package com.android.example.messapp.history
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.messapp.databinding.HistoryCardviewBinding
+import com.android.example.messapp.models.mDate
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     private var mDates: List<mDate> = emptyList<mDate>()
@@ -11,14 +12,14 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): HistoryAdapter.ViewHolder {
+    ): ViewHolder {
         val binding =
             HistoryCardviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: HistoryAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(mDates[position]) {
                 binding.date.text = this.date
@@ -54,10 +55,7 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(val binding: HistoryCardviewBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-
-    }
+        RecyclerView.ViewHolder(binding.root)
 
 
 }

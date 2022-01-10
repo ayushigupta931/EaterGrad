@@ -1,16 +1,13 @@
-package com.android.example.messapp
+package com.android.example.messapp.meal
 
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.transition.AutoTransition
-import android.transition.TransitionManager
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.android.example.messapp.R
 
 class MealsItemTouchHelper(
     private val adapter: MealsListAdapter,
@@ -54,25 +51,26 @@ class MealsItemTouchHelper(
             background = ColorDrawable(ContextCompat.getColor(adapter.context, R.color.tick))
         }
         assert(icon != null)
-        val iconMargin: Int = (itemView.getHeight() - icon!!.intrinsicHeight) / 2
-        val iconTop: Int = itemView.getTop() + (itemView.getHeight() - icon.intrinsicHeight) / 2
+        val iconMargin: Int = (itemView.height - icon!!.intrinsicHeight) / 2
+        val iconTop: Int = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
         val iconBottom = iconTop + icon.intrinsicHeight
-        if (dX > 0) { // Swiping to the right
-            val iconLeft: Int = itemView.getLeft() + iconMargin
-            val iconRight: Int = itemView.getLeft() + iconMargin + icon.intrinsicWidth
+        if (dX > 0) {
+            val iconLeft: Int = itemView.left + iconMargin
+            val iconRight: Int = itemView.left + iconMargin + icon.intrinsicWidth
             icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
             background.setBounds(
-                itemView.getLeft(), itemView.getTop(),
-                itemView.getLeft() + dX.toInt() + backgroundCornerOffset, itemView.getBottom()
-            )        } else if (dX < 0) { // Swiping to the left
-            val iconLeft: Int = itemView.getRight() - iconMargin - icon.intrinsicWidth
-            val iconRight: Int = itemView.getRight() - iconMargin
-            icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
-            background.setBounds(
-                itemView.getRight() + dX.toInt() - backgroundCornerOffset,
-                itemView.getTop(), itemView.getRight(), itemView.getBottom()
+                itemView.left, itemView.top,
+                itemView.left + dX.toInt() + backgroundCornerOffset, itemView.bottom
             )
-        } else { // view is unSwiped
+        } else if (dX < 0) {
+            val iconLeft: Int = itemView.right - iconMargin - icon.intrinsicWidth
+            val iconRight: Int = itemView.right - iconMargin
+            icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+            background.setBounds(
+                itemView.right + dX.toInt() - backgroundCornerOffset,
+                itemView.top, itemView.right, itemView.bottom
+            )
+        } else {
             background.setBounds(0, 0, 0, 0)
         }
 

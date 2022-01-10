@@ -1,4 +1,4 @@
-package com.android.example.messapp
+package com.android.example.messapp.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

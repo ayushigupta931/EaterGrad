@@ -1,8 +1,8 @@
 package com.android.example.messapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<ActivityViewmodel>()
