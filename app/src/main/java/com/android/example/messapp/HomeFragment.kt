@@ -92,7 +92,7 @@ class HomeFragment : Fragment() {
             lifecycle
         )
         viewPager.adapter = adapter
-
+        viewPager.isUserInputEnabled = false
         val tabLayoutMediator = TabLayoutMediator(
             tabLayout, viewPager, true, true
         ) { tab, position ->
