@@ -4,17 +4,22 @@
 
     <item
         android:id="@+id/action_expenses"
-        android:icon="@drawable/ic_baseline_account_balance_wallet_24"
+        android:icon="@drawable/ic_baseline_account_balance_wallet_menu_24"
         android:title="Expenses"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_history"
-        android:icon="@drawable/ic_baseline_history_24"
+        android:icon="@drawable/ic_baseline_history_menu_24"
         android:title="History"
         app:showAsAction="ifRoom|withText"/>
     <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/ic_baseline_info_menu_24"
+        android:title="About"
+        app:showAsAction="ifRoom|withText"/>
+    <item
         android:id="@+id/action_sign_out"
-        android:icon="@drawable/ic_baseline_sign_out_24"
+        android:icon="@drawable/ic_baseline_login_menu_24"
         android:title="Sign Out"
         app:showAsAction="ifRoom|withText"/>
 </menu>

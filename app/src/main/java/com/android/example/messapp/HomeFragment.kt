@@ -43,6 +43,10 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeFragment_to_historyFragment)
                 true
             }
+            R.id.action_about -> {
+                findNavController().navigate(R.id.action_homeFragment_to_aboutFragment)
+                true
+            }
             R.id.action_sign_out -> {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Sign Out")
