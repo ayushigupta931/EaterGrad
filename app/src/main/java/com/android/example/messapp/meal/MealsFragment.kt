@@ -49,6 +49,7 @@ class MealsFragment(private val position: Int) : Fragment() {
         recyclerView.adapter = recyclerAdapter
 
         viewModel.menuUiModelLiveData.observe(viewLifecycleOwner) {
+            it?:return@observe
             recyclerAdapter.submitList(it, recyclerView)
             progressBar.visibility = View.GONE
 
