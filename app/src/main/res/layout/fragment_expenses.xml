@@ -35,13 +35,13 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:paddingVertical="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="30dp">
+                android:paddingStart="10dp"
+                android:paddingEnd="30dp">
 
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/food_4" />
 
                 <TextView
@@ -51,8 +51,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:fontFamily="@font/alegreya_sans_medium"
-                    android:text="Breakfast :"
-                    android:textColor="@color/bg"
+                    android:text="@string/breakfast"
+                    android:textColor="@color/white"
                     android:textSize="30sp" />
 
                 <TextView
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textColor="@color/bg"
+                    android:textColor="@color/white"
                     android:textSize="30sp" />
 
             </LinearLayout>
@@ -81,13 +81,13 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:paddingVertical="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="30dp">
+                android:paddingStart="10dp"
+                android:paddingEnd="30dp">
 
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/food_3" />
 
                 <TextView
@@ -97,8 +97,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:fontFamily="@font/alegreya_sans_medium"
-                    android:text="Lunch :"
-                    android:textColor="@color/bg"
+                    android:text="@string/lunch"
+                    android:textColor="@color/white"
                     android:textSize="30sp" />
 
                 <TextView
@@ -106,7 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textColor="@color/bg"
+                    android:textColor="@color/white"
                     android:textSize="30sp" />
 
             </LinearLayout>
@@ -127,13 +127,13 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:paddingVertical="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="30dp">
+                android:paddingStart="10dp"
+                android:paddingEnd="30dp">
 
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/food_1" />
 
                 <TextView
@@ -143,8 +143,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:fontFamily="@font/alegreya_sans_medium"
-                    android:text="Dinner :"
-                    android:textColor="@color/bg"
+                    android:text="@string/dinner"
+                    android:textColor="@color/white"
                     android:textSize="30sp" />
 
                 <TextView
@@ -152,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textColor="@color/bg"
+                    android:textColor="@color/white"
                     android:textSize="30sp" />
 
             </LinearLayout>
@@ -180,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/alegreya_sans_medium"
-                    android:text="Total :"
+                    android:text="@string/total"
                     android:textColor="@color/tCard"
                     android:textSize="30sp" />
 

@@ -2,6 +2,11 @@
     <string name="app_name">Mess App</string>
     <string name="sign_in">Sign in</string>
     <string name="web_client_id">797607921591-vqrh4atbh97lmbsalgajk8lubudvl5lh.apps.googleusercontent.com</string>
+    <string name="today_s_count">Today\'s count</string>
+    <string name="breakfast">Breakfast :</string>
+    <string name="lunch">Lunch :</string>
+    <string name="dinner">Dinner :</string>
+    <string name="total">Total :</string>
     <array name="days">
         <item>Monday</item>
         <item>Tuesday</item>
