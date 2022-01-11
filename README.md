@@ -28,3 +28,5 @@ This project proposes a Meal Tracking System to keep track of an individual's ch
 <b> Application Link & Future Scope : </b>
 
 You can access the app : [APK LINK HERE](https://github.com/ayushigupta931/EaterGrad/blob/master/EaterGrad.apk).
+
+**Note: Right now, the admin portal is for the mess staff only.**
